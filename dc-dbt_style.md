@@ -43,16 +43,16 @@
 
 ### Environment
 
-- Create two(2) Databases for project setup; 
-    * transform/staging : Database to host all development workflows, materialized tables and views to be validated & QAed before pushing to production.  <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
-        * Staging : All other models that need to be validated and QAed by users before pushing to production
-        * Marts : Only for Facts, Dimensions and aggregated reporting table to be exposed to BI layers.
-        * Intermediate/Logic :- Business Logic and source data transformations that won't be queried by downstream users for reporting purposes.
-        * Tests (Optional) 
+Create two(2) Databases for project setup; 
+* transform/staging : Database to host all development workflows, materialized tables and views to be validated & QAed before pushing to production.  <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
+    * Staging : All other models that need to be validated and QAed by users before pushing to production
+    * Marts : Only for Facts, Dimensions and aggregated reporting table to be exposed to BI layers.
+    * Intermediate/Logic :- Business Logic and source data transformations that won't be queried by downstream users for reporting purposes.
+    * Tests (Optional) 
  
-    * analytics : This database will contain production ready (cleaned, on a schedule, query-ready) dimension and fact tables. <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
-        * Same as above in **transform/staging** db
-        * Snapshots (Optional) : If SCD need to be captured
+* analytics : This database will contain production ready (cleaned, on a schedule, query-ready) dimension and fact tables. <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
+    * Same as above in **transform/staging** db
+    * Snapshots (Optional) : If SCD need to be captured
 
 ### Schema
 
@@ -78,7 +78,7 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 {%- endmacro %}
 
 ```
-*The custom `generate_schema_name` macro can be customized to fit purpose`*
+*The custom `generate_schema_name` macro can be customized to fit purpose*
 
 
 ## Credits
