@@ -16,10 +16,10 @@
 - [ ]  Provide a short summary in the Title
 - [ ]  Description and Motivation
 - [ ]  Screenshots
-        - [ ]  Include a screenshot of the relevant section of the updated DAG
+    - [ ]  Include a screenshot of the relevant section of the updated DAG
 - [ ]  Validation of Models
-        - [ ]  Include screenshots of dbt running, tests passing, run times
-- [ ]Changes to Existing Models
+    - [ ]  Include screenshots of dbt running, tests passing, run times
+- [ ]   Changes to Existing Models
 
 
 
@@ -46,10 +46,10 @@
 
 - [ ]  Data Culture Pull Request Review Checklist
 - [ ]  Feedback to the code provides a suggested solution
-        - [ ]  Leave actionable / explicit / complete comments 
-        - [ ]  Share references when requesting changes where appropriate
-        - [ ]  Combine similar comments
-        - [ ]  Replace “you” with “we”
+    - [ ]  Leave actionable / explicit / complete comments 
+    - [ ]  Share references when requesting changes where appropriate
+    - [ ]  Combine similar comments
+    - [ ]  Replace “you” with “we”
 - [ ]  Follow Commenting Format:   <color code><label> [decorations]: <subject> 
                                 [discussion]
 
