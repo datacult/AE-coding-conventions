@@ -23,7 +23,7 @@
 
 
 
-#### Code Checklist (Put an `x` in all the items that apply, make notes next to any that haven't been addressed, and remove items that are not relevant to this PR)
+##### Code Checklist (Put an `x` in all the items that apply, make notes next to any that haven't been addressed, and remove items that are not relevant to this PR)
 
 - [ ]  My request represents one logical piece of work and is at most ~250 lines of code
 - [ ]  My commits are related to the pull request
@@ -31,7 +31,7 @@
 - [ ]  I have materialized my models appropriately
 - [ ]  I have added appropriate tests and documentation to new models
 
-#### The following checklist is for RedShift Warehouses
+##### The following checklist is for RedShift Warehouses
 - [ ] I have updated the README file
 - [ ] I have added sort and dist keys to models materialized as tables
 - [ ] I have validated the SQL in any late-binding views
