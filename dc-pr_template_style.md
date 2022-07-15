@@ -41,7 +41,6 @@
 
 
 
-# ** For Reviewers **
 # Data Culture Pull Request Review Checklist
 
 - [ ]  Data Culture Pull Request Review Checklist
