@@ -1,4 +1,4 @@
-If you need guidance on how to use the tempalte, please see the [PR Guidelines](https://docs.google.com/document/d/1gp8Y_mX-fmYLWH-Ia5JRcLIRshuovSqdFMDgZrF2gi0/edit)
+If you need guidance on how to use the template, please see [PR Guidelines](https://docs.google.com/document/d/1gp8Y_mX-fmYLWH-Ia5JRcLIRshuovSqdFMDgZrF2gi0/edit)
 
 # Data Culture Pre-Pull Request Submission Checklist 
 
@@ -21,7 +21,9 @@ If you need guidance on how to use the tempalte, please see the [PR Guidelines](
     - [ ]  Include a screenshot of the relevant section of the updated DAG
 - [ ]  Validation of Models
     - [ ]  Include screenshots of dbt running, tests passing, run times
-- [ ]   Changes to Existing Models
+- [ ]  Changes to Existing Models
+- [ ]  Any additional callouts you may have for specific code you need reviewed (ex: incurring tech debt, special logic for edge-case handling, special business logic, etc.)
+- [ ]  CI Tests have completed successfully
 
 
 
@@ -38,42 +40,37 @@ If you need guidance on how to use the tempalte, please see the [PR Guidelines](
 - [ ] I have added sort and dist keys to models materialized as tables
 - [ ] I have validated the SQL in any late-binding views
 
-- [ ]  Any additional callouts you may have for specific code you need reviewed (ex: incurring tech debt, special logic for edge-case handling, special business logic, etc)
-- [ ]  CI Tests have completed successfully
-
-
 
 # Data Culture Pull Request Review Checklist
 
-- [ ]  Data Culture Pull Request Review Checklist
+- [ ]  Provide a description of how you believe / are reading the code to function
 - [ ]  Feedback to the code provides a suggested solution
     - [ ]  Leave actionable / explicit / complete comments 
     - [ ]  Share references when requesting changes where appropriate
     - [ ]  Combine similar comments
     - [ ]  Replace “you” with “we”
-- [ ]  Follow Commenting Format:   <color code><label> [decorations]: <subject> 
+- [ ]  Follow Commenting Format:   [color code][label] [decorations]: [subject] 
                                 [discussion]
 
 
 
-#### Considerations When Reviewing 
-- [ ]  Design: Is the code well-designed and appropriate for your system?
-- [ ]  Functionality: Does the code behave as the author intended?
-    - [ ]  Provide a description of how you believe / are reading the code to function
-    - [ ]  Data returns expected results
+#### Considerations For Reviewing 
+- [ ]  **Design**: Is the code well-designed and appropriate for your system?
+- [ ]  **Functionality**: Does the code behave as the author intended?
+    - [ ]  Data returns expected results 
     - [ ]  Materializations are designated appropriately
-- [ ]  Complexity: Could the code be made simpler? Would another developer be able to easily understand and use this code when they come across it in the future?
+- [ ]  **Complexity**: Could the code be made simpler? Would another developer be able to easily understand and use this code when they come across it in the future?
     - [ ]  Is there repeat code
     - [ ]  Can the DAG be modified so fields can be defined earlier and cascaded more seamlessly
     - [ ]  Should parts of the code use macros or dbt-utils
     - [ ]  Can CTEs be models of their own
-    - [ ]  Would this code be easily scaled
-- [ ]  Tests: Does the code have correct and well-designed functional tests?
+    - [ ]  Could this code be easily scaled
+- [ ]  **Tests**: Does the code have correct and well-designed functional tests?
     - [ ]  Uniqueness and not null at a minimum
-- [ ]  Naming: Did the developer choose clear names for variables, classes, methods, etc.?
+- [ ]  **Naming**: Did the developer choose clear names for variables, models, etc.?
     - [ ]  Do model names appropriately represent the grain of the model?
-    - [ ]  Do the new or changed model names follow the conventions of the project? For example, we have specific internal conventions around model prefixes such as stg_, fct_, and dim_.
+    - [ ]  Do the new or changed model names follow the conventions of the project?
     - [ ]  Are fields in models straightforward / descriptive and to the point 
-- [ ]  Comments: Are the comments clear and useful?
-- [ ]  Style: Does the code follow our Data Culture style guides?
-- [ ]  Documentation: Did the developer also update relevant documentation?
+- [ ]  **Comments**: Are the comments clear and useful?
+- [ ]  **Style**: Does the code follow [Data Culture style guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-sql_style.md)?
+- [ ]  **Documentation**: Did the developer also update relevant documentation?
