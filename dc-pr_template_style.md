@@ -1,3 +1,5 @@
+If you need guidance on how to use the tempalte, please see the [PR Guidelines](https://docs.google.com/document/d/1gp8Y_mX-fmYLWH-Ia5JRcLIRshuovSqdFMDgZrF2gi0/edit)
+
 # Data Culture Pre-Pull Request Submission Checklist 
 
 - [ ]  Branch Naming Convention: Make it clear what the branch represents
@@ -27,7 +29,7 @@
 
 - [ ]  My request represents one logical piece of work and is at most ~250 lines of code
 - [ ]  My commits are related to the pull request
-- [ ]  My SQL follows the Data Culture style guide
+- [ ]  My SQL follows the [Data Culture style guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-sql_style.md)
 - [ ]  I have materialized my models appropriately
 - [ ]  I have added appropriate tests and documentation to new models
 
