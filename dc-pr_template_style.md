@@ -14,7 +14,7 @@ If you need guidance on how to use the template, please see [PR Guidelines](http
 
 # Data Culture Pull Request Submission Checklist
 
-- [ ]  Git Commit Message: In case you have a few changes in the same commit, be descriptive and concise in your bullet points for every change you have done
+- [ ]  Git Commit Message: Be descriptive and concise for every change you have done
 - [ ]  Provide a short summary in the Title
 - [ ]  Description and Motivation
 - [ ]  Screenshots
@@ -23,7 +23,6 @@ If you need guidance on how to use the template, please see [PR Guidelines](http
     - [ ]  Include screenshots of dbt running, tests passing, run times
 - [ ]  Changes to Existing Models
 - [ ]  Any additional callouts you may have for specific code you need reviewed (ex: incurring tech debt, special logic for edge-case handling, special business logic, etc.)
-- [ ]  CI Tests have completed successfully
 
 
 
