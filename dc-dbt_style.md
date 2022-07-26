@@ -10,7 +10,7 @@
   - [Seeds](#seeds)
   - [Macros](#macros)
   - [YAML](#yaml)
-  - [Environment & Schema Organization](#environment-&-schema)
+  - [Environment & Schema Organization](#environment-&-schema-organization)
   - [Credits](#credits)
 
 <br>
