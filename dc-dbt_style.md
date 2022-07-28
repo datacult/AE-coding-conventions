@@ -42,9 +42,6 @@ For each dbt project, there should be four layers:
 
 #### dos and don'ts with naming the Sources directory
 
-- [x] Naming the subdirectories based on the source system is best practice. That is, naming the subdirectories from where they come from is helpful as they tend to share similar loading methods and properties between tables and can be operated on similarly. So data from the internal transactional database can be a system, data from Shopify in another model, etc.
-- [x] It is **NOT** recommended to name subdirectories based on loaders as this can be too broad. So all things loaded with Fivetran from multiple sources should not all be in one subdirectory.
-- [x] It is also **NOT** recommended to create subdirectories based on business groupings like “marketing”, “finance” and so on. This is because we want to create single sources of truth and overlapping and conflicting definitions can be hidden by this method.
 
 ### Staging Layer
 
