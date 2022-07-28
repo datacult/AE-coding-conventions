@@ -42,12 +42,9 @@ For each dbt project, there should be four layers:
 
 #### dos and don'ts with naming the Sources directory
 
-    - [x] Naming the subdirectories based on the source system is best practice. That is, naming the subdirectories from where they come from is helpful as they tend to share similar loading methods and properties between tables and can be operated on similarly. So data from the internal transactional database can be a system, data from Shopify in another model, etc.
-
-    - [x] It is **NOT** recommended to name subdirectories based on loaders as this can be too broad. So all things loaded with Fivetran from multiple sources should not all be in one subdirectory.
-
-    - [x] It is also **NOT** recommended to create subdirectories based on business groupings like “marketing”, “finance” and so on. This is because we want to create single sources of truth and overlapping and conflicting definitions can be hidden by this method.
-
+- [x] Naming the subdirectories based on the source system is best practice. That is, naming the subdirectories from where they come from is helpful as they tend to share similar loading methods and properties between tables and can be operated on similarly. So data from the internal transactional database can be a system, data from Shopify in another model, etc.
+- [x] It is **NOT** recommended to name subdirectories based on loaders as this can be too broad. So all things loaded with Fivetran from multiple sources should not all be in one subdirectory.
+- [x] It is also **NOT** recommended to create subdirectories based on business groupings like “marketing”, “finance” and so on. This is because we want to create single sources of truth and overlapping and conflicting definitions can be hidden by this method.
 
 ### Staging Layer
 
@@ -103,6 +100,7 @@ In cases where you need intermediate models to operate at the source system leve
 In this layer, it is important to ensure that any CTEs used are named to provide clarity to anyone reading the code. An example would be pivot_and_aggregate_payments_to_order_grain as it gives a clear idea of what happens within the CTE.
 
 #### dos and don'ts
+
 - [x] This layer is NOT exposed to end users.
 - [x] The models can either be materialized as a view in a custom schema or ephemerally.
 - [x] To simplify structure, rather than have 10 joins in the mart, we can have most of the joins done here. That way, we can have maximum of 4 joins in the mart.
