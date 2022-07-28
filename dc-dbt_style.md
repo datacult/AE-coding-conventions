@@ -121,7 +121,6 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 
 
 ```
-.
 ├── README.md
 ├── analysis
 ├── dbt_project.yml
