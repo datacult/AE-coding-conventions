@@ -48,6 +48,7 @@ For each dbt project, there should be four layers:
 
 - [x] It is also **NOT** recommended to create subdirectories based on business groupings like “marketing”, “finance” and so on. This is because we want to create single sources of truth and overlapping and conflicting definitions can be hidden by this method.
 
+
 ### Staging Layer
 
 This is the layer that is connected to the source and low-level transformations are performed here. This is where the modular building blocks of our transformation layer live. <br>This is where we are refining the blocks that will later be built into more intricate and useful structures
