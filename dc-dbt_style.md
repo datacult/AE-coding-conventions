@@ -165,7 +165,7 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 │   │   │   ├── source_stripe__users.sql
 │   │   │   ├── source_stripe__payments.sql
 │   │   │   └── source_stripe__refunds.sql
-|   |   ├── sources
+|   ├── sources
 │   │   │   └── google_analytics
 │   │   │       ├── google_analytics.yml
 │   │   │   └── shopify
@@ -250,7 +250,7 @@ from sales
 
 ## Macros
 
-Leverage[dbt-utils](https://github.com/fishtown-analytics/dbt-utils) packages as much as possible to avoid reinventing the wheel, as this adds several macros that are commonly useful to any datawarehouse which aren't available right out of the box.
+Leverage [dbt-utils](https://github.com/fishtown-analytics/dbt-utils) packages as much as possible to avoid reinventing the wheel, as this adds several macros that are commonly useful to any datawarehouse which aren't available right out of the box.
 
 Important ones to take note of:
 
