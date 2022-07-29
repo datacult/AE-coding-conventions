@@ -18,37 +18,60 @@ Dependency management and packaging is done with [poetry](https://python-poetry.
 1. Download and install [python](https://www.python.org/downloads/)
 
 2. Install pyenv following the following process
-    * brew update
-    * brew install pyenv
-    * Configure your Mac's environment
-        * run echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-    * Activate your changes 
-        * run source ~/.bash_profile
-    * You can use pyenv to install any version required for development based on your choice
-        * e.g. run `pyenv install 3.5.0` in your terminal install python 3.5.0
-    * Check the version of python running in your local
-        * run pyenv versions
-    
-    
+```
+brew update
+
+brew install pyenv
+
+```
+
+* Configure your Mac's environment
+
+```
+echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+
+```
+
+* Activate your changes 
+
+```
+source ~/.bash_profile
+
+```
+
+* You can use pyenv to install any version required for development based on your choice
+
+e.g. 
+- run `pyenv install 3.5.0` in your terminal install python 3.5.0
+- Check the version of python running in your local
+    * run pyenv versions
+
+  
 3. Install poetry
-     * `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
-     
-     Verify the installation. You should see a version number pop up.
-        * `$ poetry --version`
+
+```
+`$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
+
+```
+
+Verify the installation. You should see a version number pop up.
+
+```
+`$ poetry --version`
+
+```
 
 4. cd to the project directory created as instructed in the setup [guide](https://www.notion.so/dbt-Setup-guide-5f8820554ea948f3a10cda2a3d2cf7c9) either the cloned repo or the initially setup directory
 
 5. Once inside the director, set the local Python version you are going to use. This will prompt poetry to use the local version of Python defined by pyenv:
 * run pyenv versions and you can set any of the returned version 
 
-e.g. To set the local directory to run on python 3.7.0 run 
-* pyenv local 3.7.0 and this prompt poetry to use the local version set. 
+e.g. To set the local directory to run on python 3.7.0 execute:
+
+`pyenv local 3.7.0`  and this prompt poetry to use the local version set. 
 
 6. Create a `pyproject.toml` file inside the same directory and paste the following :
 
-Replace the necessary details in the file such as : 
-* The python version to the version you set in `step 5` 
-* dialect to the datawarehouse been used that is snowflake, bigquery etc.
 
 ```
 [tool.poetry]
@@ -79,6 +102,11 @@ build-backend = "poetry.core.masonry.api"
 
 
 ```
+
+Replace the necessary details in the file such as : 
+* The python version to the version you set in `step 5` 
+* dialect to the datawarehouse been used that is snowflake, bigquery etc.
+
 
 7. run `poetry install` to allow poetry automatically instally dbt as well as all the necessary dependencies required for sqlfluff to run
 
