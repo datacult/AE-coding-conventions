@@ -6,6 +6,7 @@
   - [Model Configuration](#model-configuration)
   - [Macros](#macros)
   - [Environment and Schema Organization](#environment-and-schema-organization)
+  - [Development Checklists](#development-checklists)
   - [dbt Resources](#dbt-resources)
   - [Credits](#credits)
 
@@ -306,6 +307,13 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 
 ```
 *The custom `generate_schema_name` macro can be customized to fit purpose*
+
+
+
+## Development Checklists
+
+
+
 
 
 
