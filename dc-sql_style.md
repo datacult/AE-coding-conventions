@@ -63,12 +63,14 @@ Verify the installation. You should see a version number pop up.
 
 4. cd to the project directory created as instructed in the setup [guide](https://www.notion.so/dbt-Setup-guide-5f8820554ea948f3a10cda2a3d2cf7c9) either the cloned repo or the initially setup directory
 
-5. Once inside the director, set the local Python version you are going to use. This will prompt poetry to use the local version of Python defined by pyenv:
+5. Once inside the directory, set the local Python version you are going to use. This will prompt poetry to use the local version of Python defined by pyenv:
 * run pyenv versions and you can set any of the returned version 
 
-e.g. To set the local directory to run on python 3.7.0 execute:
+e.g. 
 
-`pyenv local 3.7.0`  and this prompt poetry to use the local version set. 
+To set the local directory to run on python 3.7.0:
+
+execute `pyenv local 3.7.0`  and this prompt poetry to use the local version set. 
 
 6. Create a `pyproject.toml` file inside the same directory and paste the following :
 
@@ -103,7 +105,7 @@ build-backend = "poetry.core.masonry.api"
 
 ```
 
-Replace the necessary details in the file such as : 
+Replace the necessary details in the file with information that reflect the environment you are developing on such as : 
 * The python version to the version you set in `step 5` 
 * dialect to the datawarehouse been used that is snowflake, bigquery etc.
 
@@ -114,12 +116,18 @@ Replace the necessary details in the file such as :
 
 9. To confirm `sqlfluff` and `dbt` is fully installed and all necessary connections setup in `profile.yml` file is correct run the following command:
 
-* sqlfluff version
-* dbt --version
-* dbt --version
-* dbt debug
+```
+sqlfluff version
 
-10. To confirm `sqlfluff` is fully activated create a test.sql model with the code:
+dbt --version
+
+dbt --version
+
+dbt debug
+
+```
+
+10. To confirm `sqlfluff` is fully activated create a `test.sql` model with the code:
 
 ```
 
@@ -129,6 +137,7 @@ c AS bar from my_table
 ```
 
 * Save the file
+
 * run `sqlfluff lint test.sql` to see the result returned
 
 The result below should be outputed 
@@ -152,10 +161,17 @@ L:   2 | P:  26 | L009 | Files must end with a single trailing newline.
 
 To allow `sqlfluff` correct the formatting after checking the error message and manually correcting when necessary:
 
-* run `sqlfluff fix test.sql`
-* save the test.sql file again
-* sqlfluff lint test.sql` 
+executre:
 
+```
+ 
+sqlfluff fix test.sql
+
+save the test.sql file again
+
+sqlfluff lint test.sql` 
+
+```
 
 ## SQL Styling and Rules
 
