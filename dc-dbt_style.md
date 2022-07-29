@@ -14,7 +14,9 @@
 
 ## General guidelines
 
-Study and follow the adopted [Data Culture style guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-sql_style.md)
+Study and follow the adopted [Data Culture style guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-sql_style.md). 
+
+Ensure `sqlfluff` is setup in the directory the dbt project will be setup.
 
 
 Leverage the official dbt best [practices](https://docs.getdbt.com/guides/legacy/best-practices).
