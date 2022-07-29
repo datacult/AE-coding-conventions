@@ -1,16 +1,12 @@
 # Data Culture dbt coding styling
 
   - [General guidelines](#general-guidelines)
+  - [Profiles](#profile)
   - [Project structure](#project-structure)
   - [Model Configuration](#model-configuration)
-  - [Naming Conventions](#naming-conventions)
-  - [Packages](#packages)
-  - [dbt Sources](#dbt-sources)
-  - [Models](#models)
-  - [Seeds](#seeds)
   - [Macros](#macros)
-  - [YAML](#yaml)
   - [Environment and Schema Organization](#environment-and-schema-organization)
+  - [dbt Resources](#dbt-resources)
   - [Credits](#credits)
 
 <br>
@@ -21,6 +17,13 @@ Study and follow the adopted [Data Culture style guide](https://github.com/datac
 
 
 Leverage the official dbt best [practices](https://docs.getdbt.com/guides/legacy/best-practices).
+
+
+## General guidelines
+
+####  Profile names should only the name of the company they're for.
+
+#### Sensitive information should be hidden as much as possible by leveraging environment variables
 
 
 ## Project structure
@@ -170,20 +173,91 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 
 ## Model Configuration
 
+* Follow the naming convention defined for each models in the different layer defined [here](#project-structure)
+* Each Model should have the appropritate optimization and configuration attributes (like sort/dist keys for Redshift, partition/clustering for BigQuery etc.) should be specified in the model.
+* If a particular configuration applies to all models in a directory, it should be specified in the dbt_project.yml file.
 
-## Models
+In-model configurations should be specified like this for proper formating:
 
+```
 
-## Seeds
+{{
+  config(
+    materialized = 'table',
+    sort = 'id',
+    dist = 'id'
+  )
+}}
+
+```
+* Each model should have a primary key. If no unique field exist, leverage dbt [surrogate](https://github.com/dbt-labs/dbt-utils#surrogate_key-source) utils to generate one by concatenating different granularity of the data to create one. You can check this [resource](https://www.getdbt.com/blog/the-most-underutilized-function-in-sql/) & [this](https://docs.getdbt.com/blog/sql-surrogate-keys) to understand why surrogate/unique keys are important
+* Every subdirectory should contain a schema.yml file, in which each model in the subdirectory is tested.
+* At a minimum, `unique` and `not_null` tests should be applied to the primary key of each model.
+* Properly separate the category of fields in the final CTEs for each model for easy understanding. And ensure all model have **METADATA** field such as SYSDATE (That corresponds to the timestamp of when the model was ingested into the Datawarehouse) and other useful metadata:
+
+```
+/* Good */
+select
+    /* Primary key */
+    id
+
+    /* Foreign keys and other fields */
+    , customer_id
+    , region_id
+
+    /* Timestamps */
+    , created_at
+
+    /* metrics*/
+    , revenue
+    , total_sale
+
+    /* metata*/
+    ,_one
+    ,SYSDATE
+
+from sales
+
+/* Bad */
+select
+    id
+    , created_at
+    , customer_id
+    , region_id
+    , status
+    , total_amount
+from sales
+
+```
+
+* Materialize each models to their respective schemas as defined in the schema [section](#environment-and-schema-organization):
+    * All Base and Staging Layer models materialized as Ephemeral or Views and should go in a separate staging schema. These models should not be exposed and used for reporting and analysis by downstream users
+    * All Marts model should be materialized as a table for fast querying and analysis for reporting purposes and leverage the custom schema to properly organize these models.
+* All models should be properly documented with `test` included. 
+* Avoid reserved words as column names for fields in a model 
+* Use the same field names across models where possible, e.g. a key to the customers table should be named customer_id rather than user_id.
+
 
 
 ## Macros
 
-## Packages
+Leverage[dbt-utils](https://github.com/fishtown-analytics/dbt-utils) packages as much as possible to avoid reinventing the wheel, as this adds several macros that are commonly useful to any datawarehouse which aren't available right out of the box.
+
+Important ones to take note of:
+
+* date_spine - Create a date range similar to the `generate_series()` available in Postgres
+* star - This macro pulls all the columns from a table excluding the columns listed in the except argument
+  * Incredibly helpful when joining two tables with shared fields and/or when there are too many fields to list after the join.
+  * E.g. `select {{ dbt_utils.star(from=ref('my_model'), except=["exclude_field_1", "exclude_field_2"]) }} from {{ref('my_model')}}`
+* surrogate_key - Implements a cross-database way to generate a hashed surrogate key using the fields specified. Use this when generating keys on a dimension table.
+* unique_where - Test if there is a unique constraint where something else is true
+  * E.g. See if all the values in column `foo` are unique where `bar IS FALSE`
+* unique_combination_of_columns - This can be used to test for uniques from a surrogate key created from various columns.
 
 
 
 ## Environment and Schema Organization
+
 
 ### Environment
 
@@ -223,6 +297,17 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 
 ```
 *The custom `generate_schema_name` macro can be customized to fit purpose*
+
+
+## dbt Resources
+
+- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+- Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
+- Find [dbt events](https://events.getdbt.com) near you
+- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+- See the [source code](https://github.com/fishtown-analytics/dbt)
+- Understanding what [YMAL is](https://rollout.io/blog/yaml-tutorial-everything-you-need-get-started/)
 
 
 ## Credits
