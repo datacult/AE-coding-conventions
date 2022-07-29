@@ -1,7 +1,7 @@
 # Data Culture dbt coding styling
 
   - [General guidelines](#general-guidelines)
-  - [Profiles](#profile)
+  - [Profiles](#profiles)
   - [Project structure](#project-structure)
   - [Model Configuration](#model-configuration)
   - [Macros](#macros)
@@ -19,11 +19,13 @@ Study and follow the adopted [Data Culture style guide](https://github.com/datac
 Leverage the official dbt best [practices](https://docs.getdbt.com/guides/legacy/best-practices).
 
 
-## General guidelines
+
+## Profiles
 
 ####  Profile names should only the name of the company they're for.
 
 #### Sensitive information should be hidden as much as possible by leveraging environment variables
+
 
 
 ## Project structure
@@ -35,6 +37,7 @@ To that effect, Models should be organized into folders corresponding to their p
 
 For each dbt project, there should be four layers:
 
+
 ### Sources 
 
   * This is the initial entry point for models, as they are bought in from external sources via a data loader (Fivetran)
@@ -42,6 +45,7 @@ For each dbt project, there should be four layers:
     * E.g. Data from `google_analytics` and `shopify` will have a subdirectories `google_analytics` and `shopify` respectively under the **sources** directory
 
   A `<source_name>.yml` file defining the dbt sources should exist within each source-specific directory. That is `google_analytics.yml` and `shopify.yml`.
+
 
 #### dos and don'ts with naming the Sources directory
 
@@ -102,6 +106,7 @@ In moving towards business conformed concepts, we no longer need to separate a s
 In cases where you need intermediate models to operate at the source system level (e.g. *int_shopify__orders_summed*, *int_core__orders_summed* which you would later union), you’d preserve the double underscores 
 
 In this layer, it is important to ensure that any CTEs used are named to provide clarity to anyone reading the code. An example would be pivot_and_aggregate_payments_to_order_grain as it gives a clear idea of what happens within the CTE.
+
 
 #### dos and don'ts
 
@@ -171,6 +176,7 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 └── snapshots
 ```
 
+
 ## Model Configuration
 
 * Follow the naming convention defined for each models in the different layer defined [here](#project-structure)
@@ -195,6 +201,7 @@ In-model configurations should be specified like this for proper formating:
 * At a minimum, `unique` and `not_null` tests should be applied to the primary key of each model.
 * Properly separate the category of fields in the final CTEs for each model for easy understanding. And ensure all model have **METADATA** field such as SYSDATE (That corresponds to the timestamp of when the model was ingested into the Datawarehouse) and other useful metadata:
 
+
 ```
 /* Good */
 select
@@ -212,11 +219,12 @@ select
     , revenue
     , total_sale
 
-    /* metata*/
+    /* metadata*/
     ,_one
     ,SYSDATE
 
 from sales
+
 
 /* Bad */
 select
@@ -272,6 +280,7 @@ Create two(2) Databases for project setup;
     * Same as above in **transform/staging** db
     * Snapshots (Optional) : If SCD need to be captured
 
+
 ### Schema
 
 #### [Check out dbt officials docs on the behavior of default schema](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/using-custom-schemas)
@@ -299,6 +308,7 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 *The custom `generate_schema_name` macro can be customized to fit purpose*
 
 
+
 ## dbt Resources
 
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
@@ -308,6 +318,7 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
 - See the [source code](https://github.com/fishtown-analytics/dbt)
 - Understanding what [YMAL is](https://rollout.io/blog/yaml-tutorial-everything-you-need-get-started/)
+
 
 
 ## Credits
