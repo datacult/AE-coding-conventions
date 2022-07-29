@@ -2,6 +2,7 @@
 
   - [General Setup](#general-setup)
   - [SQL Styling and rules](#sql-styling-and-rules)
+  - [Other SQL Style Guide](#other-sql-style-guide)
 
 
 ## General Setup
@@ -128,4 +129,8 @@ To allow `sqlfluff` correct the formatting after checking the error message and 
 * sqlfluff lint test.sql` 
 
 
+## SQL Styling and Rules
+
+
+## Other SQL Style Guide
 
