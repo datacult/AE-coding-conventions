@@ -175,6 +175,12 @@ sqlfluff lint test.sql`
 
 ## SQL Styling and Rules
 
+### General Guidelines
+
+  - It is important that code is [DRY](https://docs.getdbt.com/terms/dry). Utilise CTES, jinja and macros in dbt. Remember that if you type the same line twice, it needs to be maintained in two places.
+  - Do not optimmize for fewer lines of code, new lines are cheap but brain time is expensive.
+  - Be consistent. Even if you are not sure of the best way to do something do it the same way throughout your code, it will be easier to read and make changes if they are needed.
+  - Be explicit. Defining something explicitly will ensure that it works the way you expect and it is easier for the next person, which may be you, when you are explicit in SQL.
 
 ## Other SQL Style Guide
 
