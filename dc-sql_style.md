@@ -182,6 +182,28 @@ sqlfluff lint test.sql`
   - Be consistent. Even if you are not sure of the best way to do something do it the same way throughout your code, it will be easier to read and make changes if they are needed.
   - Be explicit. Defining something explicitly will ensure that it works the way you expect and it is easier for the next person, which may be you, when you are explicit in SQL.
 
+### Best Practices
+ - No tabs should be used - only spaces. Your editor should be setup to convert tabs to spaces.
+
+ - Wrap long lines of code, between 80 and 100, to a new line.
+ 
+ - Do not use the `USING` command in joins because it produces inaccurate results in Snowflake.
+
+ - Understand the difference between the following related statements and use appropriately:
+   - `UNION ALL` and `UNION`
+   - `LIKE` and `ILIKE`
+   - `NOT` and `!` and `<>`
+   - `DATE_PART()` and `DATE_TRUNC()`
+
+ - Use the `AS` operator when aliasing a column or table.
+
+ - Prefer `DATEDIFF` to inline additions `date_column + interval_column`. The function is more explicit and will work for a wider variety of date parts.
+
+ - Prefer `!=` to `<>`. This is because `!=` is more common in other programming languages and reads like "not equal" which is how we're more likely to speak.
+
+ - Prefer `LOWER(column) LIKE '%match%'` to column `ILIKE '%Match%'`. This lowers the chance of stray capital letters leading to an unexpected result.
+
+ - Prefer `WHERE` to `HAVING` when either would suffice.
 
 ## Other SQL Style Guide
 
