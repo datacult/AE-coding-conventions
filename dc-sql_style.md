@@ -182,5 +182,6 @@ sqlfluff lint test.sql`
   - Be consistent. Even if you are not sure of the best way to do something do it the same way throughout your code, it will be easier to read and make changes if they are needed.
   - Be explicit. Defining something explicitly will ensure that it works the way you expect and it is easier for the next person, which may be you, when you are explicit in SQL.
 
+
 ## Other SQL Style Guide
 
