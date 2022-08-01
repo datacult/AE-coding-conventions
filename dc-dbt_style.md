@@ -74,10 +74,10 @@ The base layer directory may be introduced when two sources must be **joined** t
 
 ```
         source -----> base -----╷
-                                |---> staging -----> intermediate -----╷
-        source -----> base------╵                                      |----> mart
-                                                                       |
-        source ---------------------> staging -----> intermediate -----╵
+                                |---> staging -----> Logic -----╷
+        source -----> base------╵                               |----> mart
+                                                                |
+        source ---------------------> staging -----> Logic -----╵
 ```
 When it comes with naming files & models in directories, consistency is key. The file names must be unique and correspond to the name of the model when selected and created in the warehouse. As a result, as much clear information should be in the file name. 
 This includes the prefix for which layer the model exists in, important grouping information and whatever specific information about the entity or transformation in the model.
