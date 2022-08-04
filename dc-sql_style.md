@@ -205,5 +205,42 @@ sqlfluff lint test.sql`
 
  - Prefer `WHERE` to `HAVING` when either would suffice.
 
+ ### Commenting
+
+  - When making single line comments in a model use the `--` syntax
+
+  - When making multi-line comments in a model use the `/* */` syntax
+
+  - Respect the character line limit when making comments. Move to a new line or to the model documentation if the comment is too long
+
+  - Utilize the dbt model documentation when it is available
+
+  - Calculations made in SQL should have a brief description of what's going on and if available, a link to the handbook defining the metric (and how it's calculated)
+
+  - Instead of leaving TODO comments, create new issues for improvement
+
+  ### Naming Conventions
+ 
+  - An ambiguous field name such as `id`, `name`, or `type` should always be prefixed by what it is identifying or naming:
+
+  `
+  -- Preferred
+  SELECT
+      id    AS account_id,
+      name  AS account_name,
+      type  AS account_type,
+      ...
+
+  -- vs
+
+  -- Not Preferred
+  SELECT
+      id,
+      name,
+      type,
+      ...
+`
+
+
 ## Other SQL Style Guide
 
