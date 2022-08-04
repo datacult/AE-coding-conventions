@@ -314,16 +314,17 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 
 ## Development Checklists
 
-### Pre Development 
+#### Pre Development 
 
-- [x] Confirm all business requires and metrics to be tracked
-- [x] Data Model design (if necessary) to power the metrics and required reports developed and shared for feedbacks. Reference [Lucidchart](https://www.lucidchart.com/) or [Plantuml](https://plantuml.com/) for ERD diagrams
+- [x] All business requirements and metrics properly documented
+- [x] Data Model design (if necessary) required for the metrics and report developed and shared for feedbacks. Reference [Lucidchart](https://www.lucidchart.com/) or [Plantuml](https://plantuml.com/) for ERD diagrams
 
 
-### Development 
+
+#### Development 
 
 - [x] All staging and logic models aren't exposed to downstream users
-- [x] Staging and analytics models are separated in different database
+- [x] Staging and analytics models are separated in different databases
 - [x] The correct naming convention is adopted for all models in different layers
 - [x] All models are well tested atleast a `not_null` and `unique` test
 - [x] All models are well documented
@@ -331,7 +332,7 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 - [x] All models are properly configured with the correct materialization for each layer
 
 
-### Post Development 
+#### Post Development 
 
 - [x] All codes are reviewed and follows the adopted DC [PR guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-pr_template_style.md)
 
