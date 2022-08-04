@@ -2,7 +2,7 @@
 
   - [General Setup](#general-setup)
   - [SQL Styling and rules](#sql-styling-and-rules)
-  - [Other SQL Style Guide](#other-sql-style-guide)
+  - [Credits](#credits)
 
 
 ## General Setup
@@ -176,5 +176,5 @@ sqlfluff lint test.sql`
 ## SQL Styling and Rules
 
 
-## Other SQL Style Guide
+## Credits
 
