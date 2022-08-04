@@ -41,7 +41,7 @@ To that effect, Models should be organized into folders corresponding to their p
 For each dbt project, there should be four layers:
 
 
-### Sources 
+#### Sources 
 
   * This is the initial entry point for models, as they are bought in from external sources via a data loader (Fivetran)
   * Each source should have their own folder, which corresponds to the schema they are being imported from
@@ -50,14 +50,14 @@ For each dbt project, there should be four layers:
   A `<source_name>.yml` file defining the dbt sources should exist within each source-specific directory. That is `google_analytics.yml` and `shopify.yml`.
 
 
-#### dos and don'ts with naming the Sources directory
+##### dos and don'ts with naming the Sources directory
 
 - [x] Naming the subdirectories based on the source system is best practice. That is, naming the subdirectories from where they come from is helpful as they tend to share similar loading methods and properties between tables and can be operated on similarly. So data from the internal transactional database can be a system, data from Shopify in another model, etc.
 - [x] It is **NOT** recommended to name subdirectories based on loaders as this can be too broad. So all things loaded with Fivetran from multiple sources should not all be in one subdirectory.
 - [x] It is also **NOT** recommended to create subdirectories based on business groupings like “marketing”, “finance” and so on. This is because we want to create single sources of truth and overlapping and conflicting definitions can be hidden by this method.
 
 
-### Staging Layer
+#### Staging Layer
 
 This is the layer that is connected to the source and low-level transformations are performed here. This is where the modular building blocks of our transformation layer live. <br>This is where we are refining the blocks that will later be built into more intricate and useful structures
 Each model in this layer bears a one-to-one relationship with the source data table it represents. It has the same granularity. <br> Transformation that occur in this layer include: 
@@ -96,7 +96,7 @@ Models in this layer should have a 1:1 relationship to the sources and are the o
 Other Considerations can be found [here](https://docs.getdbt.com/guides/best-practices/how-we-structure/2-staging#staging-other-considerations).
 
 
-### Logic Layer
+#### Logic Layer
 
 This is the layer where most of the transformation takes place. This is where we bring together the blocks in the base layer. 
 These models are built with specific purposes on the way to the final data products
@@ -111,7 +111,7 @@ In cases where you need intermediate models to operate at the source system leve
 In this layer, it is important to ensure that any CTEs used are named to provide clarity to anyone reading the code. An example would be pivot_and_aggregate_payments_to_order_grain as it gives a clear idea of what happens within the CTE.
 
 
-#### dos and don'ts
+##### dos and don'ts
 
 - [x] This layer is NOT exposed to end users.
 - [x] The models can either be materialized as a view in a custom schema or ephemerally.
@@ -120,7 +120,7 @@ In this layer, it is important to ensure that any CTEs used are named to provide
 - [x] If a particular model is being used across multiple models, it should be made a macro instead of remaining a model. This is to keep things DRY (Don’t Repeat Yourself)
 
 
-### Marts
+#### Marts
 
 They are stores of models that describe business entities and processes. They are often grouped by business unit: marketing, finance, product. Models that are shared across an entire business are grouped in a core directory.
 
@@ -270,7 +270,7 @@ Important ones to take note of:
 ## Environment and Schema Organization
 
 
-### Environment
+#### Environment
 
 Create two(2) Databases for project setup; 
 * **transform/staging** : Database to host all development workflows, materialized tables and views to be validated & QAed before pushing to production.  <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
@@ -284,7 +284,7 @@ Create two(2) Databases for project setup;
     * Snapshots (Optional) : If SCD need to be captured
 
 
-### Schema
+#### Schema
 
 #### [Check out dbt officials docs on the behavior of default schema](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/using-custom-schemas)
 
