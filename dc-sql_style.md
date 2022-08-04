@@ -223,7 +223,7 @@ sqlfluff lint test.sql`
  
   - An ambiguous field name such as `id`, `name`, or `type` should always be prefixed by what it is identifying or naming:
 
-  `
+ ```
   -- Preferred
   SELECT
       id    AS account_id,
@@ -239,7 +239,8 @@ sqlfluff lint test.sql`
       name,
       type,
       ...
-`
+
+```
 
 
 ## Other SQL Style Guide
