@@ -205,7 +205,7 @@ sqlfluff lint test.sql`
 
  - Prefer `WHERE` to `HAVING` when either would suffice.
 
- ### Commenting
+### Commenting
 
   - When making single line comments in a model use the `--` syntax
 
@@ -219,7 +219,7 @@ sqlfluff lint test.sql`
 
   - Instead of leaving TODO comments, create new issues for improvement
 
-  ### Naming Conventions
+### Naming Conventions
  
   - An ambiguous field name such as `id`, `name`, or `type` should always be prefixed by what it is identifying or naming:
 
@@ -241,7 +241,266 @@ sqlfluff lint test.sql`
       ...
 
 ```
+  - All field names should be [snake-cased:](https://en.wikipedia.org/wiki/Snake_case)
+
+```
+ -- Preferred
+  SELECT
+      dvcecreatedtstamp AS device_created_timestamp
+      ...
+
+  -- vs
+
+  -- Not Preferred
+  SELECT
+      dvcecreatedtstamp AS DeviceCreatedTimestamp
+      ...
+```
+ - Boolean field names should start with `has_`, `is_`, or `does_`:
+```
+ -- Preferred
+  SELECT
+      deleted AS is_deleted,
+      sla     AS has_sla
+      ...
 
 
-## Other SQL Style Guide
+  -- vs
+
+  -- Not Preferred
+  SELECT
+      deleted,
+      sla,
+      ...
+
+```
+
+  - Timestamps should end with `_at` and should always be in UTC.
+  - Dates should end with `_date`.
+  - Avoid key words like `date` or `month` as a column name.
+  - When truncating dates name the column in accordance with the truncation.
+
+```
+SELECT
+      original_at,                                        -- 2020-01-15 12:15:00.00
+      original_date,                                      -- 2020-01-15
+      DATE_TRUNC('month',original_date) AS original_month -- 2020-01-01
+      ...
+
+```
+
+### Reference Conventions
+- When joining tables and referencing columns from both tables consider the following:
+    - reference the full table name instead of an alias when the table name is shorter, maybe less than 20 characters. (try to rename the CTE if possible, and lastly consider aliasing to something descriptive)
+    - always qualify each column in the SELECT statement with the table name / alias for easy navigation
+
+```
+-- Preferred
+SELECT
+    budget_forecast_cogs_opex.account_id,
+    date_details.fiscal_year,
+    date_details.fiscal_quarter,
+    date_details.fiscal_quarter_name,
+    cost_category.cost_category_level_1,
+    cost_category.cost_category_level_2
+FROM budget_forecast_cogs_opex
+LEFT JOIN date_details
+    ON date_details.first_day_of_month = budget_forecast_cogs_opex.accounting_period
+LEFT JOIN cost_category
+    ON budget_forecast_cogs_opex.unique_account_name = cost_category.unique_account_name
+
+ 
+-- vs 
+
+-- Not Preferred
+SELECT
+    a.account_id,
+    b.fiscal_year,
+    b.fiscal_quarter,
+    b.fiscal_quarter_name,
+    c.cost_category_level_1,
+    c.cost_category_level_2
+FROM budget_forecast_cogs_opex a
+LEFT JOIN date_details b
+    ON b.first_day_of_month = a.accounting_period
+LEFT JOIN cost_category c
+    ON b.unique_account_name = c.unique_account_name
+
+```    
+- Only use double quotes when necessary, such as columns that contain special characters or are case sensitive.
+
+```
+      -- Preferred
+      SELECT 
+          "First_Name_&_" AS first_name,
+          ...
+
+      -- vs
+
+      -- Not Preferred
+      SELECT 
+          FIRST_NAME AS first_name,
+          ...
+
+```
+- Prefer accessing JSON using the bracket syntax.
+
+```
+      -- Preferred
+      SELECT
+          data_by_row['id']::bigint as id_value
+          ...
+        
+      -- vs
+
+      -- Not Preferred
+      SELECT
+          data_by_row:"id"::bigint as id_value
+          ...
+
+```
+- Prefer explicit join statements.
+
+```
+      -- Preferred
+      SELECT *
+      FROM first_table
+      INNER JOIN second_table
+      ...
+
+      -- vs
+
+      -- Not Preferred
+      SELECT *
+      FROM first_table,
+          second_table
+      ...
+
+```      
+### Common Table Expressions (CTEs)
+- Prefer CTEs over sub-queries as CTEs make SQL more readable and are more performant:
+
+```
+  -- Preferred
+  WITH important_list AS (
+
+      SELECT DISTINCT
+          specific_column
+      FROM other_table
+      WHERE specific_column != 'foo'
+        
+  )
+
+  SELECT
+      primary_table.column_1,
+      primary_table.column_2
+  FROM primary_table
+  INNER JOIN important_list
+      ON primary_table.column_3 = important_list.specific_column
+
+  -- vs   
+
+  -- Not Preferred
+  SELECT
+      primary_table.column_1,
+      primary_table.column_2
+  FROM primary_table
+  WHERE primary_table.column_3 IN (
+      SELECT DISTINCT specific_column 
+      FROM other_table 
+      WHERE specific_column != 'foo')
+
+```
+- Use CTEs to reference other tables.
+- CTEs should be placed at the top of the query.
+- Where performance permits, CTEs should perform a single, logical unit of work.
+- CTE names should be as concise as possible while still being clear.
+   - Avoid long names like replace_sfdc_account_id_with_master_record_id and prefer a shorter name with a comment in the CTE. This will help avoid table aliasing in joins.
+- CTEs with confusing or notable logic should be commented in file and documented in dbt docs.
+- CTEs that are duplicated across models should be pulled out into their own models.
+### Data Types
+- Use default data types and not aliases. Review the Snowflake summary of data types for more details. The defaults are:
+   - NUMBER instead of DECIMAL, NUMERIC, INTEGER, BIGINT, etc.
+   - FLOAT instead of DOUBLE, REAL, etc.
+   - VARCHAR instead of STRING, TEXT, etc.
+   - TIMESTAMP instead of DATETIME
+The exception to this is for timestamps. Prefer TIMESTAMP to TIME. Note that the default for TIMESTAMP is TIMESTAMP_NTZ which does not include a time zone.
+
+### Functions
+- Prefer IFNULL to NVL.
+- Prefer IFF to a single line CASE statement:
+
+```
+  -- Preferred
+  SELECT 
+      IFF(column_1 = 'foo', column_2,column_3) AS logic_switch,
+      ...
+
+  -- vs 
+
+  -- Not Preferred
+  SELECT
+      CASE
+          WHEN column_1 = 'foo' THEN column_2
+          ELSE column_3
+      END AS logic_switch,
+      ...
+```
+- Prefer IFF to selecting a boolean statement:
+
+```
+  -- Preferred
+  SELECT 
+      IFF(amount < 10,TRUE,FALSE) AS is_less_than_ten,
+      ...
+  -- vs
+
+  -- Not Preferred
+  SELECT 
+      (amount < 10) AS is_less_than_ten,
+      ...
+
+```
+- Prefer simplifying repetitive CASE statements where possible:
+
+```
+  -- Preferred
+  SELECT
+      CASE field_id
+          WHEN 1 THEN 'date'
+          WHEN 2 THEN 'integer'
+          WHEN 3 THEN 'currency'
+          WHEN 4 THEN 'boolean'
+          WHEN 5 THEN 'variant'
+          WHEN 6 THEN 'text'
+      END AS field_type,
+      ...
+
+  -- vs 
+
+  -- Not Preferred
+  SELECT 
+      CASE
+          WHEN field_id = 1 THEN 'date'
+          WHEN field_id = 2 THEN 'integer'
+          WHEN field_id = 3 THEN 'currency'
+          WHEN field_id = 4 THEN 'boolean'
+          WHEN field_id = 5 THEN 'variant'
+          WHEN field_id = 6 THEN 'text'
+      END AS field_type,
+      ...
+```    
+- Prefer the explicit date function over date_part, but prefer date_part over extract:
+```
+  DAYOFWEEK(created_at) > DATE_PART(dayofweek, 'created_at') > EXTRACT(dow FROM created_at)
+```
+- Be mindful of date part interval when using the DATEDIFF function as the function will only return whole interval results.
+
+
+  ## Other SQL Style Guide
+There are other style guides one could use:
+- [Brooklyn Data Co](https://github.com/brooklyn-data/co/blob/main/sql_style_guide.md)
+- [Fishtown Analytics](https://github.com/dbt-labs/corp/blob/main/dbt_coding_conventions.md#sql-style-guide)
+- [Matt Mazur](https://github.com/mattm/sql-style-guide)
+- [Kickstarter](https://gist.github.com/fredbenenson/7bb92718e19138c20591)
 
