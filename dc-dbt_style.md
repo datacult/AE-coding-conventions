@@ -141,32 +141,33 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 │   │   ├── finance
 │   │   │   ├── payments.sql
 │   │   │   ├── customers.sql
-│   │   │   ├── finance.yml
+│   │   │   ├── schema.yml
 │   │   ├── marketing
 │   │   │   ├── page_hits.sql
 │   │   │   ├── sessions.sql
 │   │   │   ├── users.sql
-│   │   │   ├── marketing.yml
+│   │   │   ├── schema.yml
 │   │   └── etc.
 │   ├── Logic
 │   │   └── finance
-│   │       ├── _int_finance__models.yml
-│   │       └── int_payments_pivoted_to_orders.sql
+│   │       ├── logic_finance__models.yml
+│   │       └── logic_payments_pivoted_to_orders.sql
+│   │       └── schema.yml
 │   ├── staging
 │   │   ├── google_analytics
-│   │   │   ├── source_google_analytics.yml
-│   │   │   ├── source_google_analytics__ga_campaigns.sql
-│   │   │   └── source_google_analytics__ga_orders.sql
+│   │   │   ├── schema.yml
+│   │   │   ├── stg_google_analytics__ga_campaigns.sql
+│   │   │   └── stg_google_analytics__ga_orders.sql
 │   │   │   └── base
 │   │   │       ├── base_google_analytics.yml
 │   │   │       ├── base_google_analytics__campaigns__US.sql
 │   │   │       ├── base_google_analytics__campaigns__CA.sql
 │   │   │       ├── base_google_analytics__campaigns__NG.sql
 │   │   ├── shopify
-│   │   │   ├── source_stripe.yml
-│   │   │   ├── source_stripe__users.sql
-│   │   │   ├── source_stripe__payments.sql
-│   │   │   └── source_stripe__refunds.sql
+│   │   │   ├── schema.yml
+│   │   │   ├── stg_stripe__users.sql
+│   │   │   ├── stg_stripe__payments.sql
+│   │   │   └── stg_stripe__refunds.sql
 |   ├── sources
 │   │   │   └── google_analytics
 │   │   │       ├── google_analytics.yml
@@ -327,7 +328,7 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 - [x] Staging and analytics models are separated in different databases
 - [x] The correct naming convention is adopted for all models in different layers
 - [x] All models are well tested atleast a `not_null` and `unique` test
-- [x] All models are well documented
+- [x] All models are well documented. Every model has at least a description that will explain the what? Why? How?. Some things that should be explained are for example granularity, known issues with the data if exist etc.
 - [x] SQL scripts follows Data Culture adopted [SQL guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-sql_style.md)
 - [x] All models are properly configured with the correct materialization for each layer
 
