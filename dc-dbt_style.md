@@ -74,10 +74,10 @@ The base layer directory may be introduced when two sources must be **joined** t
 
 ```
         source -----> base -----╷
-                                |---> staging -----> Logic -----╷
+                                |---> staging -----> intermediate -----╷
         source -----> base------╵                               |----> mart
                                                                 |
-        source ---------------------> staging -----> Logic -----╵
+        source ---------------------> staging -----> intermediate -----╵
 ```
 When it comes with naming files & models in directories, consistency is key. The file names must be unique and correspond to the name of the model when selected and created in the warehouse. As a result, as much clear information should be in the file name. 
 This includes the prefix for which layer the model exists in, important grouping information and whatever specific information about the entity or transformation in the model.
@@ -96,14 +96,14 @@ Models in this layer should have a 1:1 relationship to the sources and are the o
 Other Considerations can be found [here](https://docs.getdbt.com/guides/best-practices/how-we-structure/2-staging#staging-other-considerations).
 
 
-#### Logic Layer
+#### intermediate Layer
 
 This is the layer where most of the transformation takes place. This is where we bring together the blocks in the base layer. 
 These models are built with specific purposes on the way to the final data products
 
-When it comes to naming files, it is important to use the `logic_[entity]s_[verb]s`.sql format.
+When it comes to naming files, it is important to use the `intermediate_[entity]s_[verb]s`.sql format.
 The best guiding principle is to think about verbs (e.g. *pivoted*, *aggregated_to_user*, *joined*, *fanned_out_by_quanity*, *funnel_created*, etc.) 
-in the intermediate layer. In our example project, we use an intermediate model to pivot payments out to the order grain, so we name our model *logic_payments_pivoted_to_orders*. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know SQL. 
+in the intermediate layer. In our example project, we use an intermediate model to pivot payments out to the order grain, so we name our model *intermediate_payments_pivoted_to_orders*. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know SQL. 
 That clarity is worth the long file name. It’s important to note that we’ve dropped the double underscores at this layer.
 In moving towards business conformed concepts, we no longer need to separate a system and an entity and simply reference the unified entity if possible. 
 In cases where you need intermediate models to operate at the source system level (e.g. *int_shopify__orders_summed*, *int_core__orders_summed* which you would later union), you’d preserve the double underscores 
@@ -126,7 +126,7 @@ They are stores of models that describe business entities and processes. They ar
 
 Models in this layer are materialized as **tables** and when they take too long to query, when that takes too long, we configure as [incremental models](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/configuring-incremental-models). We only add complexity when necessary.
 * We are to build wide and denormalised tables as the final output as much as possible.
-* Unless simple joins, joins in a model here should NOT be more than 3. This is because we are not going for complexity in this layer. Any complexity should be moved to the logic layer.
+* Unless simple joins, joins in a model here should NOT be more than 3. This is because we are not going for complexity in this layer. Any complexity should be moved to the intermediate layer.
 
 Other considerations can be found [here](https://docs.getdbt.com/guides/best-practices/how-we-structure/4-marts#marts-other-considerations).
 
@@ -148,10 +148,10 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 │   │   │   ├── users.sql
 │   │   │   ├── schema.yml
 │   │   └── etc.
-│   ├── Logic
+│   ├── intermediate
 │   │   └── finance
-│   │       ├── logic_finance__models.yml
-│   │       └── logic_payments_pivoted_to_orders.sql
+│   │       ├── intermediate_finance__models.yml
+│   │       └── intermediate_payments_pivoted_to_orders.sql
 │   │       └── schema.yml
 │   ├── staging
 │   │   ├── google_analytics
@@ -277,7 +277,7 @@ Create two(2) Databases for project setup;
 * **transform/staging** : Database to host all development workflows, materialized tables and views to be validated & QAed before pushing to production.  <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
     * Staging : All other models that need to be validated and QAed by users before pushing to production
     * Marts : Only for Facts, Dimensions and aggregated reporting table to be exposed to BI layers.
-    * Intermediate/Logic :- Business Logic and source data transformations that won't be queried by downstream users for reporting purposes.
+    * Intermediate/intermediate :- Business intermediate and source data transformations that won't be queried by downstream users for reporting purposes.
     * Tests (Optional) 
  
 * **analytics** : This database will contain production ready (cleaned, on a schedule, query-ready) dimension and fact tables. <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
@@ -324,7 +324,7 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 
 #### Development 
 
-- [x] All staging and logic models aren't exposed to downstream users
+- [x] All staging and intermediate models aren't exposed to downstream users
 - [x] Staging and analytics models are separated in different databases
 - [x] The correct naming convention is adopted for all models in different layers
 - [x] All models are well tested atleast a `not_null` and `unique` test
