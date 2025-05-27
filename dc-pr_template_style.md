@@ -1,4 +1,6 @@
+<!--
 If you need guidance on how to use the template, please see [PR Guidelines](https://docs.google.com/document/d/1gp8Y_mX-fmYLWH-Ia5JRcLIRshuovSqdFMDgZrF2gi0/edit)
+-->
 
 ### Description & Motivation
 <!--
