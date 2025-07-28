@@ -229,9 +229,9 @@ sqlfluff lint test.sql`
  ```
   -- Preferred
   select
-      id    AS account_id,
-      name  AS account_name,
-      type  AS account_type,
+      id    as account_id,
+      name  as account_name,
+      type  as account_type,
       ...
 
   -- vs
@@ -262,9 +262,9 @@ sqlfluff lint test.sql`
  - Boolean field names should start with `has_`, `is_`, or `does_`:
 ```
  -- Preferred
-  SELECT
-      deleted AS is_deleted,
-      sla     AS has_sla
+  select
+      deleted as is_deleted,
+      sla     as has_sla
       ...
 
 
@@ -357,7 +357,7 @@ left join cost_category c
       -- vs
 
       -- Not Preferred
-      SELECT
+      select
           data_by_row:"id"::bigint as id_value
           ...
 
@@ -404,14 +404,14 @@ left join cost_category c
   -- vs   
 
   -- Not Preferred
-  SELECT
+  select
       primary_table.column_1,
       primary_table.column_2
-  FROM primary_table
-  WHERE primary_table.column_3 IN (
-      SELECT DISTINCT specific_column 
-      FROM other_table 
-      WHERE specific_column != 'foo')
+  from primary_table
+  where primary_table.column_3 IN (
+      select distinct specific_column 
+      from other_table 
+      where specific_column != 'foo')
 
 ```
 - Use CTEs to reference other tables.
@@ -435,32 +435,32 @@ The exception to this is for timestamps. Prefer TIMESTAMP to TIME. Note that the
 
 ```
   -- Preferred
-  SELECT 
-      IFF(column_1 = 'foo', column_2,column_3) AS logic_switch,
+  select 
+      iff(column_1 = 'foo', column_2,column_3) as logic_switch,
       ...
 
   -- vs 
 
   -- Not Preferred
-  SELECT
-      CASE
-          WHEN column_1 = 'foo' THEN column_2
-          ELSE column_3
-      END AS logic_switch,
+  select
+      case
+          when column_1 = 'foo' then column_2
+          else column_3
+      end as logic_switch,
       ...
 ```
 - Prefer IFF to selecting a boolean statement:
 
 ```
   -- Preferred
-  SELECT 
-      IFF(amount < 10,TRUE,FALSE) AS is_less_than_ten,
+  select 
+      iff(amount < 10,TRUE,FALSE) AS is_less_than_ten,
       ...
   -- vs
 
   -- Not Preferred
-  SELECT 
-      (amount < 10) AS is_less_than_ten,
+  select 
+      (amount < 10) as is_less_than_ten,
       ...
 
 ```
@@ -468,29 +468,29 @@ The exception to this is for timestamps. Prefer TIMESTAMP to TIME. Note that the
 
 ```
   -- Preferred
-  SELECT
-      CASE field_id
-          WHEN 1 THEN 'date'
-          WHEN 2 THEN 'integer'
-          WHEN 3 THEN 'currency'
-          WHEN 4 THEN 'boolean'
-          WHEN 5 THEN 'variant'
-          WHEN 6 THEN 'text'
+  select
+      case field_id
+          when 1 then 'date'
+          when 2 then 'integer'
+          when 3 then 'currency'
+          when 4 then 'boolean'
+          when 5 then 'variant'
+          when 6 then 'text'
       END AS field_type,
       ...
 
   -- vs 
 
   -- Not Preferred
-  SELECT 
-      CASE
-          WHEN field_id = 1 THEN 'date'
-          WHEN field_id = 2 THEN 'integer'
-          WHEN field_id = 3 THEN 'currency'
-          WHEN field_id = 4 THEN 'boolean'
-          WHEN field_id = 5 THEN 'variant'
-          WHEN field_id = 6 THEN 'text'
-      END AS field_type,
+  select 
+      case
+          when field_id = 1 then 'date'
+          when field_id = 2 then 'integer'
+          when field_id = 3 then 'currency'
+          when field_id = 4 then 'boolean'
+          when field_id = 5 then 'variant'
+          when field_id = 6 then 'text'
+      end as field_type,
       ...
 ```    
 - Prefer the explicit date function over date_part, but prefer date_part over extract:
