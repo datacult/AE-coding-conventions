@@ -205,6 +205,9 @@ sqlfluff lint test.sql`
 
  - Prefer `WHERE` to `HAVING` when either would suffice.
 
+ - Maintain the same casing (UPPER or LOWER) across. We often prefer `Lower` 
+ 
+
 ### Commenting
 
   - When making single line comments in a model use the `--` syntax
@@ -225,7 +228,7 @@ sqlfluff lint test.sql`
 
  ```
   -- Preferred
-  SELECT
+  select
       id    AS account_id,
       name  AS account_name,
       type  AS account_type,
@@ -234,7 +237,7 @@ sqlfluff lint test.sql`
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       id,
       name,
       type,
@@ -245,14 +248,14 @@ sqlfluff lint test.sql`
 
 ```
  -- Preferred
-  SELECT
+  select
       dvcecreatedtstamp AS device_created_timestamp
       ...
 
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       dvcecreatedtstamp AS DeviceCreatedTimestamp
       ...
 ```
@@ -268,7 +271,7 @@ sqlfluff lint test.sql`
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       deleted,
       sla,
       ...
@@ -281,10 +284,10 @@ sqlfluff lint test.sql`
   - When truncating dates name the column in accordance with the truncation.
 
 ```
-SELECT
+select
       original_at,                                        -- 2020-01-15 12:15:00.00
       original_date,                                      -- 2020-01-15
-      DATE_TRUNC('month',original_date) AS original_month -- 2020-01-01
+      date_trunc('month',original_date) AS original_month -- 2020-01-01
       ...
 
 ```
@@ -296,49 +299,49 @@ SELECT
 
 ```
 -- Preferred
-SELECT
+select
     budget_forecast_cogs_opex.account_id,
     date_details.fiscal_year,
     date_details.fiscal_quarter,
     date_details.fiscal_quarter_name,
     cost_category.cost_category_level_1,
     cost_category.cost_category_level_2
-FROM budget_forecast_cogs_opex
-LEFT JOIN date_details
-    ON date_details.first_day_of_month = budget_forecast_cogs_opex.accounting_period
-LEFT JOIN cost_category
-    ON budget_forecast_cogs_opex.unique_account_name = cost_category.unique_account_name
+from budget_forecast_cogs_opex
+left join date_details
+    on date_details.first_day_of_month = budget_forecast_cogs_opex.accounting_period
+left join cost_category
+    on budget_forecast_cogs_opex.unique_account_name = cost_category.unique_account_name
 
  
 -- vs 
 
 -- Not Preferred
-SELECT
+select
     a.account_id,
     b.fiscal_year,
     b.fiscal_quarter,
     b.fiscal_quarter_name,
     c.cost_category_level_1,
     c.cost_category_level_2
-FROM budget_forecast_cogs_opex a
-LEFT JOIN date_details b
-    ON b.first_day_of_month = a.accounting_period
-LEFT JOIN cost_category c
-    ON b.unique_account_name = c.unique_account_name
+from budget_forecast_cogs_opex a
+left join date_details b
+    on b.first_day_of_month = a.accounting_period
+left join cost_category c
+    on b.unique_account_name = c.unique_account_name
 
 ```    
 - Only use double quotes when necessary, such as columns that contain special characters or are case sensitive.
 
 ```
       -- Preferred
-      SELECT 
+      select 
           "First_Name_&_" AS first_name,
           ...
 
       -- vs
 
       -- Not Preferred
-      SELECT 
+      select 
           FIRST_NAME AS first_name,
           ...
 
@@ -347,7 +350,7 @@ LEFT JOIN cost_category c
 
 ```
       -- Preferred
-      SELECT
+      select
           data_by_row['id']::bigint as id_value
           ...
         
@@ -363,16 +366,16 @@ LEFT JOIN cost_category c
 
 ```
       -- Preferred
-      SELECT *
-      FROM first_table
-      INNER JOIN second_table
+      select *
+      from first_table
+      inner join second_table
       ...
 
       -- vs
 
       -- Not Preferred
-      SELECT *
-      FROM first_table,
+      select *
+      from first_table,
           second_table
       ...
 
@@ -382,21 +385,21 @@ LEFT JOIN cost_category c
 
 ```
   -- Preferred
-  WITH important_list AS (
+  with important_list AS (
 
-      SELECT DISTINCT
+      select distinct
           specific_column
-      FROM other_table
-      WHERE specific_column != 'foo'
+      from other_table
+      where specific_column != 'foo'
         
   )
 
-  SELECT
+  select
       primary_table.column_1,
       primary_table.column_2
-  FROM primary_table
-  INNER JOIN important_list
-      ON primary_table.column_3 = important_list.specific_column
+  from primary_table
+  inner join important_list
+      on primary_table.column_3 = important_list.specific_column
 
   -- vs   
 
