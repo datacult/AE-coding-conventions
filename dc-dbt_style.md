@@ -41,7 +41,7 @@ To that effect, Models should be organized into folders corresponding to their p
 For each dbt project, there should be four layers:
 
 
-### Sources 
+#### Sources 
 
   * This is the initial entry point for models, as they are bought in from external sources via a data loader (Fivetran)
   * Each source should have their own folder, which corresponds to the schema they are being imported from
@@ -50,14 +50,14 @@ For each dbt project, there should be four layers:
   A `<source_name>.yml` file defining the dbt sources should exist within each source-specific directory. That is `google_analytics.yml` and `shopify.yml`.
 
 
-#### dos and don'ts with naming the Sources directory
+##### dos and don'ts with naming the Sources directory
 
 - [x] Naming the subdirectories based on the source system is best practice. That is, naming the subdirectories from where they come from is helpful as they tend to share similar loading methods and properties between tables and can be operated on similarly. So data from the internal transactional database can be a system, data from Shopify in another model, etc.
 - [x] It is **NOT** recommended to name subdirectories based on loaders as this can be too broad. So all things loaded with Fivetran from multiple sources should not all be in one subdirectory.
 - [x] It is also **NOT** recommended to create subdirectories based on business groupings like “marketing”, “finance” and so on. This is because we want to create single sources of truth and overlapping and conflicting definitions can be hidden by this method.
 
 
-### Staging Layer
+#### Staging Layer
 
 This is the layer that is connected to the source and low-level transformations are performed here. This is where the modular building blocks of our transformation layer live. <br>This is where we are refining the blocks that will later be built into more intricate and useful structures
 Each model in this layer bears a one-to-one relationship with the source data table it represents. It has the same granularity. <br> Transformation that occur in this layer include: 
@@ -74,10 +74,10 @@ The base layer directory may be introduced when two sources must be **joined** t
 
 ```
         source -----> base -----╷
-                                |---> staging -----> intermediate -----╷
-        source -----> base------╵                                      |----> mart
-                                                                       |
-        source ---------------------> staging -----> intermediate -----╵
+                                |---> staging -----> int_model -----╷
+        source -----> base------╵                                   |----> mart
+                                                                    |
+        source ---------------------> staging -----> int_model -----╵
 ```
 When it comes with naming files & models in directories, consistency is key. The file names must be unique and correspond to the name of the model when selected and created in the warehouse. As a result, as much clear information should be in the file name. 
 This includes the prefix for which layer the model exists in, important grouping information and whatever specific information about the entity or transformation in the model.
@@ -96,22 +96,22 @@ Models in this layer should have a 1:1 relationship to the sources and are the o
 Other Considerations can be found [here](https://docs.getdbt.com/guides/best-practices/how-we-structure/2-staging#staging-other-considerations).
 
 
-### Logic Layer
+#### int_model Layer
 
 This is the layer where most of the transformation takes place. This is where we bring together the blocks in the base layer. 
 These models are built with specific purposes on the way to the final data products
 
-When it comes to naming files, it is important to use the `logic_[entity]s_[verb]s`.sql format.
+When it comes to naming files, it is important to use the `int_model_[entity]s_[verb]s`.sql format.
 The best guiding principle is to think about verbs (e.g. *pivoted*, *aggregated_to_user*, *joined*, *fanned_out_by_quanity*, *funnel_created*, etc.) 
-in the intermediate layer. In our example project, we use an intermediate model to pivot payments out to the order grain, so we name our model *logic_payments_pivoted_to_orders*. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know SQL. 
+in the int_model layer. In our example project, we use an int_model model to pivot payments out to the order grain, so we name our model *int_model_payments_pivoted_to_orders*. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know SQL. 
 That clarity is worth the long file name. It’s important to note that we’ve dropped the double underscores at this layer.
 In moving towards business conformed concepts, we no longer need to separate a system and an entity and simply reference the unified entity if possible. 
-In cases where you need intermediate models to operate at the source system level (e.g. *int_shopify__orders_summed*, *int_core__orders_summed* which you would later union), you’d preserve the double underscores 
+In cases where you need int_model models to operate at the source system level (e.g. *int_shopify__orders_summed*, *int_core__orders_summed* which you would later union), you’d preserve the double underscores 
 
 In this layer, it is important to ensure that any CTEs used are named to provide clarity to anyone reading the code. An example would be pivot_and_aggregate_payments_to_order_grain as it gives a clear idea of what happens within the CTE.
 
 
-#### dos and don'ts
+##### dos and don'ts
 
 - [x] This layer is NOT exposed to end users.
 - [x] The models can either be materialized as a view in a custom schema or ephemerally.
@@ -120,13 +120,13 @@ In this layer, it is important to ensure that any CTEs used are named to provide
 - [x] If a particular model is being used across multiple models, it should be made a macro instead of remaining a model. This is to keep things DRY (Don’t Repeat Yourself)
 
 
-### Marts
+#### Marts
 
 They are stores of models that describe business entities and processes. They are often grouped by business unit: marketing, finance, product. Models that are shared across an entire business are grouped in a core directory.
 
 Models in this layer are materialized as **tables** and when they take too long to query, when that takes too long, we configure as [incremental models](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/configuring-incremental-models). We only add complexity when necessary.
 * We are to build wide and denormalised tables as the final output as much as possible.
-* Unless simple joins, joins in a model here should NOT be more than 3. This is because we are not going for complexity in this layer. Any complexity should be moved to the logic layer.
+* Unless simple joins, joins in a model here should NOT be more than 3. This is because we are not going for complexity in this layer. Any complexity should be moved to the int_model layer.
 
 Other considerations can be found [here](https://docs.getdbt.com/guides/best-practices/how-we-structure/4-marts#marts-other-considerations).
 
@@ -141,32 +141,33 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 │   │   ├── finance
 │   │   │   ├── payments.sql
 │   │   │   ├── customers.sql
-│   │   │   ├── finance.yml
+│   │   │   ├── schema.yml
 │   │   ├── marketing
 │   │   │   ├── page_hits.sql
 │   │   │   ├── sessions.sql
 │   │   │   ├── users.sql
-│   │   │   ├── marketing.yml
+│   │   │   ├── schema.yml
 │   │   └── etc.
-│   ├── Logic
+│   ├── int_model
 │   │   └── finance
-│   │       ├── _int_finance__models.yml
-│   │       └── int_payments_pivoted_to_orders.sql
+│   │       ├── int_model_finance__models.yml
+│   │       └── int_model_payments_pivoted_to_orders.sql
+│   │       └── schema.yml
 │   ├── staging
 │   │   ├── google_analytics
-│   │   │   ├── source_google_analytics.yml
-│   │   │   ├── source_google_analytics__ga_campaigns.sql
-│   │   │   └── source_google_analytics__ga_orders.sql
+│   │   │   ├── schema.yml
+│   │   │   ├── stg_google_analytics__ga_campaigns.sql
+│   │   │   └── stg_google_analytics__ga_orders.sql
 │   │   │   └── base
 │   │   │       ├── base_google_analytics.yml
 │   │   │       ├── base_google_analytics__campaigns__US.sql
 │   │   │       ├── base_google_analytics__campaigns__CA.sql
 │   │   │       ├── base_google_analytics__campaigns__NG.sql
 │   │   ├── shopify
-│   │   │   ├── source_stripe.yml
-│   │   │   ├── source_stripe__users.sql
-│   │   │   ├── source_stripe__payments.sql
-│   │   │   └── source_stripe__refunds.sql
+│   │   │   ├── schema.yml
+│   │   │   ├── stg_stripe__users.sql
+│   │   │   ├── stg_stripe__payments.sql
+│   │   │   └── stg_stripe__refunds.sql
 |   ├── sources
 │   │   │   └── google_analytics
 │   │   │       ├── google_analytics.yml
@@ -270,13 +271,13 @@ Important ones to take note of:
 ## Environment and Schema Organization
 
 
-### Environment
+#### Environment
 
 Create two(2) Databases for project setup; 
 * **transform/staging** : Database to host all development workflows, materialized tables and views to be validated & QAed before pushing to production.  <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
     * Staging : All other models that need to be validated and QAed by users before pushing to production
     * Marts : Only for Facts, Dimensions and aggregated reporting table to be exposed to BI layers.
-    * Intermediate/Logic :- Business Logic and source data transformations that won't be queried by downstream users for reporting purposes.
+    * int_model/int_model :- Business int_model and source data transformations that won't be queried by downstream users for reporting purposes.
     * Tests (Optional) 
  
 * **analytics** : This database will contain production ready (cleaned, on a schedule, query-ready) dimension and fact tables. <br> For easy data retrieval and it can organized into different **schemas** based on dbt project layout as follows:
@@ -284,7 +285,7 @@ Create two(2) Databases for project setup;
     * Snapshots (Optional) : If SCD need to be captured
 
 
-### Schema
+#### Schema
 
 #### [Check out dbt officials docs on the behavior of default schema](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/using-custom-schemas)
 
@@ -314,8 +315,27 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 
 ## Development Checklists
 
+#### Pre Development 
+
+- [x] All business requirements and metrics properly documented
+- [x] Data Model design (if necessary) required for the metrics and report developed and shared for feedbacks. Reference [Lucidchart](https://www.lucidchart.com/) or [Plantuml](https://plantuml.com/) for ERD diagrams
 
 
+
+#### Development 
+
+- [x] All staging and int_model models aren't exposed to downstream users
+- [x] Staging and analytics models are separated in different databases
+- [x] The correct naming convention is adopted for all models in different layers
+- [x] All models are well tested atleast a `not_null` and `unique` test
+- [x] All models are well documented. Every model has at least a description that will explain the what? Why? How?. Some things that should be explained are for example granularity, known issues with the data if exist etc.
+- [x] SQL scripts follows Data Culture adopted [SQL guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-sql_style.md)
+- [x] All models are properly configured with the correct materialization for each layer
+
+
+#### Post Development 
+
+- [x] All codes are reviewed and follows the adopted DC [PR guide](https://github.com/datacult/AE-coding-conventions/blob/main/dc-pr_template_style.md)
 
 
 

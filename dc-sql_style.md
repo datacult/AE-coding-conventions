@@ -2,7 +2,7 @@
 
   - [General Setup](#general-setup)
   - [SQL Styling and rules](#sql-styling-and-rules)
-  - [Other SQL Style Guide](#other-sql-style-guide)
+  - [Credits](#credits)
 
 
 ## General Setup
@@ -205,6 +205,9 @@ sqlfluff lint test.sql`
 
  - Prefer `WHERE` to `HAVING` when either would suffice.
 
+ - Maintain the same casing (UPPER or LOWER) across. We often prefer `Lower` 
+ 
+
 ### Commenting
 
   - When making single line comments in a model use the `--` syntax
@@ -225,16 +228,16 @@ sqlfluff lint test.sql`
 
  ```
   -- Preferred
-  SELECT
-      id    AS account_id,
-      name  AS account_name,
-      type  AS account_type,
+  select
+      id    as account_id,
+      name  as account_name,
+      type  as account_type,
       ...
 
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       id,
       name,
       type,
@@ -245,30 +248,30 @@ sqlfluff lint test.sql`
 
 ```
  -- Preferred
-  SELECT
+  select
       dvcecreatedtstamp AS device_created_timestamp
       ...
 
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       dvcecreatedtstamp AS DeviceCreatedTimestamp
       ...
 ```
  - Boolean field names should start with `has_`, `is_`, or `does_`:
 ```
  -- Preferred
-  SELECT
-      deleted AS is_deleted,
-      sla     AS has_sla
+  select
+      deleted as is_deleted,
+      sla     as has_sla
       ...
 
 
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       deleted,
       sla,
       ...
@@ -281,10 +284,10 @@ sqlfluff lint test.sql`
   - When truncating dates name the column in accordance with the truncation.
 
 ```
-SELECT
+select
       original_at,                                        -- 2020-01-15 12:15:00.00
       original_date,                                      -- 2020-01-15
-      DATE_TRUNC('month',original_date) AS original_month -- 2020-01-01
+      date_trunc('month',original_date) AS original_month -- 2020-01-01
       ...
 
 ```
@@ -296,49 +299,49 @@ SELECT
 
 ```
 -- Preferred
-SELECT
+select
     budget_forecast_cogs_opex.account_id,
     date_details.fiscal_year,
     date_details.fiscal_quarter,
     date_details.fiscal_quarter_name,
     cost_category.cost_category_level_1,
     cost_category.cost_category_level_2
-FROM budget_forecast_cogs_opex
-LEFT JOIN date_details
-    ON date_details.first_day_of_month = budget_forecast_cogs_opex.accounting_period
-LEFT JOIN cost_category
-    ON budget_forecast_cogs_opex.unique_account_name = cost_category.unique_account_name
+from budget_forecast_cogs_opex
+left join date_details
+    on date_details.first_day_of_month = budget_forecast_cogs_opex.accounting_period
+left join cost_category
+    on budget_forecast_cogs_opex.unique_account_name = cost_category.unique_account_name
 
  
 -- vs 
 
 -- Not Preferred
-SELECT
+select
     a.account_id,
     b.fiscal_year,
     b.fiscal_quarter,
     b.fiscal_quarter_name,
     c.cost_category_level_1,
     c.cost_category_level_2
-FROM budget_forecast_cogs_opex a
-LEFT JOIN date_details b
-    ON b.first_day_of_month = a.accounting_period
-LEFT JOIN cost_category c
-    ON b.unique_account_name = c.unique_account_name
+from budget_forecast_cogs_opex a
+left join date_details b
+    on b.first_day_of_month = a.accounting_period
+left join cost_category c
+    on b.unique_account_name = c.unique_account_name
 
 ```    
 - Only use double quotes when necessary, such as columns that contain special characters or are case sensitive.
 
 ```
       -- Preferred
-      SELECT 
+      select 
           "First_Name_&_" AS first_name,
           ...
 
       -- vs
 
       -- Not Preferred
-      SELECT 
+      select 
           FIRST_NAME AS first_name,
           ...
 
@@ -347,14 +350,14 @@ LEFT JOIN cost_category c
 
 ```
       -- Preferred
-      SELECT
+      select
           data_by_row['id']::bigint as id_value
           ...
         
       -- vs
 
       -- Not Preferred
-      SELECT
+      select
           data_by_row:"id"::bigint as id_value
           ...
 
@@ -363,16 +366,16 @@ LEFT JOIN cost_category c
 
 ```
       -- Preferred
-      SELECT *
-      FROM first_table
-      INNER JOIN second_table
+      select *
+      from first_table
+      inner join second_table
       ...
 
       -- vs
 
       -- Not Preferred
-      SELECT *
-      FROM first_table,
+      select *
+      from first_table,
           second_table
       ...
 
@@ -382,33 +385,33 @@ LEFT JOIN cost_category c
 
 ```
   -- Preferred
-  WITH important_list AS (
+  with important_list AS (
 
-      SELECT DISTINCT
+      select distinct
           specific_column
-      FROM other_table
-      WHERE specific_column != 'foo'
+      from other_table
+      where specific_column != 'foo'
         
   )
 
-  SELECT
+  select
       primary_table.column_1,
       primary_table.column_2
-  FROM primary_table
-  INNER JOIN important_list
-      ON primary_table.column_3 = important_list.specific_column
+  from primary_table
+  inner join important_list
+      on primary_table.column_3 = important_list.specific_column
 
   -- vs   
 
   -- Not Preferred
-  SELECT
+  select
       primary_table.column_1,
       primary_table.column_2
-  FROM primary_table
-  WHERE primary_table.column_3 IN (
-      SELECT DISTINCT specific_column 
-      FROM other_table 
-      WHERE specific_column != 'foo')
+  from primary_table
+  where primary_table.column_3 IN (
+      select distinct specific_column 
+      from other_table 
+      where specific_column != 'foo')
 
 ```
 - Use CTEs to reference other tables.
@@ -432,32 +435,32 @@ The exception to this is for timestamps. Prefer TIMESTAMP to TIME. Note that the
 
 ```
   -- Preferred
-  SELECT 
-      IFF(column_1 = 'foo', column_2,column_3) AS logic_switch,
+  select 
+      iff(column_1 = 'foo', column_2,column_3) as logic_switch,
       ...
 
   -- vs 
 
   -- Not Preferred
-  SELECT
-      CASE
-          WHEN column_1 = 'foo' THEN column_2
-          ELSE column_3
-      END AS logic_switch,
+  select
+      case
+          when column_1 = 'foo' then column_2
+          else column_3
+      end as logic_switch,
       ...
 ```
 - Prefer IFF to selecting a boolean statement:
 
 ```
   -- Preferred
-  SELECT 
-      IFF(amount < 10,TRUE,FALSE) AS is_less_than_ten,
+  select 
+      iff(amount < 10,TRUE,FALSE) AS is_less_than_ten,
       ...
   -- vs
 
   -- Not Preferred
-  SELECT 
-      (amount < 10) AS is_less_than_ten,
+  select 
+      (amount < 10) as is_less_than_ten,
       ...
 
 ```
@@ -465,29 +468,29 @@ The exception to this is for timestamps. Prefer TIMESTAMP to TIME. Note that the
 
 ```
   -- Preferred
-  SELECT
-      CASE field_id
-          WHEN 1 THEN 'date'
-          WHEN 2 THEN 'integer'
-          WHEN 3 THEN 'currency'
-          WHEN 4 THEN 'boolean'
-          WHEN 5 THEN 'variant'
-          WHEN 6 THEN 'text'
+  select
+      case field_id
+          when 1 then 'date'
+          when 2 then 'integer'
+          when 3 then 'currency'
+          when 4 then 'boolean'
+          when 5 then 'variant'
+          when 6 then 'text'
       END AS field_type,
       ...
 
   -- vs 
 
   -- Not Preferred
-  SELECT 
-      CASE
-          WHEN field_id = 1 THEN 'date'
-          WHEN field_id = 2 THEN 'integer'
-          WHEN field_id = 3 THEN 'currency'
-          WHEN field_id = 4 THEN 'boolean'
-          WHEN field_id = 5 THEN 'variant'
-          WHEN field_id = 6 THEN 'text'
-      END AS field_type,
+  select 
+      case
+          when field_id = 1 then 'date'
+          when field_id = 2 then 'integer'
+          when field_id = 3 then 'currency'
+          when field_id = 4 then 'boolean'
+          when field_id = 5 then 'variant'
+          when field_id = 6 then 'text'
+      end as field_type,
       ...
 ```    
 - Prefer the explicit date function over date_part, but prefer date_part over extract:
