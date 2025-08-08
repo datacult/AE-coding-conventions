@@ -311,6 +311,12 @@ Use the `generate_schema_name` macro below to dynamically determine where to mat
 ```
 *The custom `generate_schema_name` macro can be customized to fit purpose*
 
+#### SQL Code Linting and PreCommit 
+
+Refer to this [repo](https://github.com/datacult/dbt-project-guidelist) for my details on how to ensure all codes are properly linted and dbt codes with the minimum requires; 
+* Models with basic Testing
+* Modes with descriptions
+* Etc.
 
 
 ## Development Checklists
