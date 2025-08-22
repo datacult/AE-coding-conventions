@@ -24,7 +24,7 @@ Include a screenshot of the updated DAG through at least 2 steps downstream of t
 
 ### Validation of models
 <!--
- How does the model output compare to the existing source of truth / expected behavior? This should include links to any QA spreadsheets, screenshots of changes in outputs, example queries used for validation, and any other relevant information surrounding the validation of model updates.
+ How does the model output compare to the existing source of truth / expected behavior? This should include links to any QA spreadsheets, screenshots of changes in outputs, example queries used for validation, and any other relevant information surrounding the validation of model updates. Please refer to this QA workflow [document here](https://docs.google.com/document/d/1hkok6qewy0Ba6SaQFKhLHOVAz4qYeF-fVBalmPuE8tY/edit?tab=t.0#heading=h.l92c7y7d7r6a).
 -->
 
 ### Checklist
