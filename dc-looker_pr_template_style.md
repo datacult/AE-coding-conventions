@@ -21,7 +21,8 @@ Outline changes for each model that was updated with added detail about changes 
 ### Content Validation
 <!--
 Please share screenshots of existing reports before and after the changes you are making to show downstream impacts as well as any relevant example explores. 
-Include links to test reports where relevant. For new fields and/or explores include a screenshot showing how the field(s) appear in the explore.
+Include links to test reports where relevant. For new fields and/or explores include a screenshot showing how the field(s) appear in the explore. QA Workflow document
+can be [referenced here](https://docs.google.com/document/d/1hkok6qewy0Ba6SaQFKhLHOVAz4qYeF-fVBalmPuE8tY/edit?tab=t.0#heading=h.l92c7y7d7r6a)
 -->
 
 **Before Changes**
