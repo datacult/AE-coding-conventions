@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: identity__person_stream
+    description: >
+      Union of identity activities used for identity resolution. 
+    columns:
+      - name: activity
+        data_type: varchar
+        description: >
+          Name and source of activity
+
+      - name: anonymous_customer_id
+        data_type: varchar
+        description: >
+          Anonymous customer id
+
+      - name: customer
+        data_type: varchar
+        description: >
+          Customer id
+
+      - name: activity_id
+        data_type: varchar
+        description: >
+          Activity ID
+        data_tests:
+          - not_null
+
+      - name: ts
+        data_type: timestamp_tz
+        description: >
+          Timestamp
+
+      - name: unique_id
+        data_type: varchar
+        description: >
+          Unique ID created as a surrogate of activity ID and anonymous customer ID
+        data_tests:
+          - not_null
+          - unique
