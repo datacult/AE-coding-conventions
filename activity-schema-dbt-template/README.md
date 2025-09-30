@@ -286,7 +286,7 @@ Refer to this [documentation](https://www.notion.so/Guide-Activity-Schema-Valida
 - [ ] Develop an internal project on activity schema implementation similar to [dbt jaffle shop](google.com/search?q=dbt+jaffle+shop&oq=dbt+jaffle+shop&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIICAYQABgWGB4yCAgHEAAYFhgeMggICBAAGBYYHjIICAkQABgWGB7SAQgyNTMxajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8) that can be used as testing and learning resource
 - [ ] Pre-built industry templates (e-commerce, SaaS, etc.) as we work with different clients leveraging activity schema
 - [ ] Enhanced current temporal join and multi-analysis temploral join patterns
-- [ ] Machine learning feature generation patterns
+- [ ] More features
 
 🙏 Acknowledgments
 
