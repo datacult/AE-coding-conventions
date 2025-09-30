@@ -71,13 +71,10 @@ activity_schema_dbt_template/
 │       └── custom_metrics.sql
 ├── tests/                                # Data quality tests
 │   ├── activity_schema/
-│   │   └── test_identity_coverage.sql
-│   └── reconciliation/
-│       └── test_revenue_reconciliation.sql
+│     └── test_identity_coverage.sql
 ├── docs/
 │   ├── IMPLEMENTATION_GUIDE.md           # Step-by-step setup
 │   ├── TEMPORAL_JOINS_REFERENCE.md       # All 12 join types
-│   └── DECISION_MATRIX.md                # Business question → Join type
 ├── dbt_project.yml
 ├── packages.yml
 └── README.md
