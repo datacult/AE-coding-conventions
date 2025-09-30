@@ -1,6 +1,6 @@
 # Activity Schema dbt Template
 
-A production-ready dbt template for implementing activity schema data modeling with identity resolution and temporal join analysis.
+A production-ready dbt template for implementing activity schema data modeling with identity resolution and temporal join analysis (WIP).
 
 ## 🎯 What is Activity Schema?
 
@@ -12,11 +12,11 @@ Activity schema is an event-centric data modeling approach that:
 
 Refer to the documentation [here](https://www.notion.so/Activity-Schema-Docs-224fa8808c1b80e9982be516399656ce_) for more deepdive into the Activity Schema paradigm and its philosophical approach
 
-This template provides a complete framework with pre-built macros, identity resolution logic, and temporal join patterns.
+This template provides a complete framework with pre-built macros, identity resolution logic, and temporal join patterns (WIP).
 
 ## 📋 Prerequisites
 
-- dbt Core 1.5+ or dbt Cloud
+- dbt Core or dbt Cloud
 - Snowflake, BigQuery, or Redshift data warehouse
 - Basic understanding of dbt project structure
 - Raw event data from your application/website
@@ -130,6 +130,8 @@ Activity streams are standardized representations of business events.
 
 **Template Pattern:**
 
+**Activities that Require Identity Resolution**
+
 ```sql
 -- models/intermediate/activity_streams/person_stream_[activity_name].sql
 {{ config(materialized='table') }}
@@ -162,6 +164,44 @@ where event_type = '[your_event_type]'
 - `person_stream_started_session.sql`
 - `person_stream_viewed_product.sql`
 - etc.
+
+
+**Activities that do not Require Identity Resolution**
+
+```sql 
+
+-- models/intermediate/activity_streams/person_stream_[activity_name].sql
+{{ config(materialized='table') }}
+
+select 
+    {{ dbt_utils.generate_surrogate_key(['user_id', 'timestamp']) }} as activity_id,
+    user_id as anonymous_customer_id,
+    customer,  
+    activity,
+    timestamp as ts,
+    revenue_amount as revenue_impact,
+    page_url as link,
+    
+    -- Store event attributes as JSON
+    object_construct(
+        'product_id', product_id,
+        'category', category,
+        'utm_source', utm_source
+    ) as feature_json,
+    
+    row_number() over (
+        partition by user_id 
+        order by timestamp
+    ) as activity_occurrence,
+    
+    lead(timestamp) over (
+        partition by user_id 
+        order by timestamp
+    ) as activity_repeated_at
+    
+from {{ ref('stg_web_events') }} ---- REPLACE THE STAGING/INTERMEDIATE MODELS
+where event_type = '[your_event_type]'
+```
 
 ### Step 3: Build Analysis Models
 
