@@ -1,3 +1,14 @@
+-- REQUIRED: Add dependency hint for incremental logic
+-- depends_on: {{ ref('identity_change_detector') }}
+
+{{ config(
+    materialized='incremental',
+    unique_key='activity_id',
+    merge_update_columns=['customer']
+) }}
+
+{% call resolve_identity() %}
+
 with arcee_customers as (
     select customer
     from {{ ref('stg_zitadel__events') }}
@@ -29,3 +40,20 @@ where
         select arcee_customers.customer
         from arcee_customers
     )
+
+    -- COPY AS-IS: Standard incremental logic
+    {% if is_incremental() %}
+        and (
+            ts > (select max(ts) from {{ this }})
+            or anonymous_customer_id in (             
+            -- MODIFY: replace user_distinct_id with anonymous_customer_id 
+		            --or any respective field
+                select anonymous_customer_id 
+                from {{ ref('identity_change_detector') }}
+                where last_identity_event >= current_date - 1
+            )
+        )
+    {% endif %}
+
+
+{% endcall %}

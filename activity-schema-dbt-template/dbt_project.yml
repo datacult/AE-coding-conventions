@@ -2,7 +2,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'arcee_dbt_project'
+name: 'xxx_dbt_project'
 version: '1.0.0'
 config-version: 2
 
@@ -36,18 +36,23 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  arcee_dbt_project:
+  xx_dbt_project:
     mart:
       +materialized: table
       +database: analytics
-    
+      +schema: reporting
+      +cluster_by: ['to_date(ts)']
     intermediate:
       +materialized: table
-      +database: analytics
+      +database: transformation
       +schema: staging
-      # person_stream:
-      #   +cluster_by: ['to_date(ts)','activity']
+      activity_stream:
+        +cluster_by: ['to_date(ts)','activity']
+    identity:
+      +materialized: table
+      +database: transformation
+      +schema: staging
 
     staging:
-      +database: analytics
+      +database: transformation
       +schema: staging
