@@ -10,7 +10,7 @@ Activity schema is an event-centric data modeling approach that:
 - Handles identity resolution across anonymous and known user states
 - Provides flexible, behavioral-driven insights
 
-Refer to the documentation [here](https://www.notion.so/Activity-Schema-Docs-224fa8808c1b80e9982be516399656ce_) for more deepdive into the Activity Schema paradigm and its philosophical approach
+Refer to the documentation [here](https://www.notion.so/Activity-Schema-Docs-224fa8808c1b80e9982be516399656ce) for more deepdive into the Activity Schema paradigm and its philosophical approach
 
 This template provides a complete framework with pre-built macros, identity resolution logic, and temporal join patterns (WIP).
 
@@ -270,13 +270,29 @@ Refer to the documentation on [Temporal Joins Basics](https://www.notion.so/Temp
 | `last_in_between` | Last in session/period | Exit page in session |
 | `aggregate_in_between` | All in session/period | Total pages per session |
 
-See [TEMPORAL_JOINS_REFERENCE.md](docs/TEMPORAL_JOINS_REFERENCE.md) for detailed documentation.
 
 ## 🧪 Validation/Testing
 
 Refer to this [documentation](https://www.notion.so/Guide-Activity-Schema-Validation-203fa8808c1b808381f0ce2e4a83f660#203fa8808c1b808381f0ce2e4a83f660) on the validation checklist
 
-## 📚 Documentation
+
+### Step 5: Job Orchestration and Scheduling (WIP)
+
+🗺️ Roadmap
+[] Learning Series on specific aspect of Activity Schema Modeling
+[] Develop an internal project on activity schema implementation similar to [dbt jaffle shop](google.com/search?q=dbt+jaffle+shop&oq=dbt+jaffle+shop&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIICAYQABgWGB4yCAgHEAAYFhgeMggICBAAGBYYHjIICAkQABgWGB7SAQgyNTMxajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8) that can be used as testing and learning resource
+[] Pre-built industry templates (e-commerce, SaaS, etc.) as we work with different clients leveraging activity schema
+[] Enhanced current temporal join and multi-analysis temploral join patterns
+[] Machine learning feature generation patterns
+
+🙏 Acknowledgments
+
+* Activity schema concept from Narrator
+* Inspired by dbt best practices 
+
+📞 Feedback
+
+Feel free to make update and communicate any inherent issues observed as you work with the different templates
 
 
 **Built with ❤️ for the DC analytics engineering team - Shout to David/Brittany helping out on this knowledge base**
