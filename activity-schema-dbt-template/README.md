@@ -131,7 +131,8 @@ Activity streams are standardized representations of business events.
 **Template Pattern:**
 
 **Activities that Require Identity Resolution**
-see -> models/intermediate/person_stream/person_stream_viewed_pages.sql
+
+see ->  `models/intermediate/person_stream/person_stream_viewed_pages.sql`
 
 ```sql
 -- models/intermediate/activity_streams/person_stream_[activity_name].sql
@@ -206,7 +207,7 @@ from {{ ref('stg_web_events') }} ---- REPLACE THE STAGING/INTERMEDIATE MODELS
 where event_type = '[your_event_type]'
 ```
 
-### Step 3: Build Analysis Models
+### Step 3: Build Analysis Models (WIP.....DON'T USE FOR NOW)
 
 Use temporal joins to answer business questions.
 
