@@ -71,13 +71,10 @@ activity_schema_dbt_template/
 │       └── custom_metrics.sql
 ├── tests/                                # Data quality tests
 │   ├── activity_schema/
-│   │   └── test_identity_coverage.sql
-│   └── reconciliation/
-│       └── test_revenue_reconciliation.sql
+│     └── test_identity_coverage.sql
 ├── docs/
 │   ├── IMPLEMENTATION_GUIDE.md           # Step-by-step setup
 │   ├── TEMPORAL_JOINS_REFERENCE.md       # All 12 join types
-│   └── DECISION_MATRIX.md                # Business question → Join type
 ├── dbt_project.yml
 ├── packages.yml
 └── README.md
@@ -280,14 +277,14 @@ Refer to the documentation on [Temporal Joins Basics](https://www.notion.so/Temp
 Refer to this [documentation](https://www.notion.so/Guide-Activity-Schema-Validation-203fa8808c1b808381f0ce2e4a83f660#203fa8808c1b808381f0ce2e4a83f660) on the validation checklist
 
 
-### Step 5: Job Orchestration and Scheduling (WIP)
+### Step 5: Job Orchestration and Scheduling (WIP..)
 
 🗺️ Roadmap
 - [ ] Learning Series on specific aspect of Activity Schema Modeling
 - [ ] Develop an internal project on activity schema implementation similar to [dbt jaffle shop](google.com/search?q=dbt+jaffle+shop&oq=dbt+jaffle+shop&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIICAYQABgWGB4yCAgHEAAYFhgeMggICBAAGBYYHjIICAkQABgWGB7SAQgyNTMxajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8) that can be used as testing and learning resource
 - [ ] Pre-built industry templates (e-commerce, SaaS, etc.) as we work with different clients leveraging activity schema
 - [ ] Enhanced current temporal join and multi-analysis temploral join patterns
-- [ ] Machine learning feature generation patterns
+- [ ] More features
 
 🙏 Acknowledgments
 

@@ -1,0 +1,14 @@
+[0m21:09:24.198411 [debug] [MainThread]: Got an exception trying to initialize tracking
+
+
+============================== 21:09:24.213889 | 47641bdc-ffbb-46ba-9e91-93e64278d53b ==============================
+[0m21:09:24.213889 [info ] [MainThread]: Running with dbt=1.10.10
+[0m21:09:24.214380 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'log_path': 'logs', 'quiet': 'False', 'indirect_selection': 'eager', 'partial_parse': 'True', 'warn_error': 'None', 'debug': 'False', 'target_path': 'None', 'printer_width': '80', 'empty': 'False', 'use_colors': 'True', 'fail_fast': 'False', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'version_check': 'True', 'introspect': 'True', 'no_print': 'None', 'cache_selected_only': 'False', 'invocation_command': 'dbt compile --select mv_test_2', 'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False', 'log_cache_events': 'False', 'log_format': 'default', 'profiles_dir': '/Users/opeyemi/.dbt'}
+[0m21:09:24.214753 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/opeyemi/Documents/DC/activity_schema/AE-coding-conventions/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m21:09:24.221361 [debug] [MainThread]: Resource report: {"command_name": "compile", "command_success": false, "command_wall_clock_time": 0.045427833, "process_in_blocks": "0", "process_kernel_time": 0.12596, "process_mem_max_rss": "108314624", "process_out_blocks": "0", "process_user_time": 0.528588}
+[0m21:09:24.221783 [debug] [MainThread]: Command `dbt compile` failed at 21:09:24.221726 after 0.05 seconds
+[0m21:09:24.221933 [debug] [MainThread]: Flushing usage events
