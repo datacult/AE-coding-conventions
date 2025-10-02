@@ -204,7 +204,7 @@ from {{ ref('stg_web_events') }} ---- REPLACE THE STAGING/INTERMEDIATE MODELS
 where event_type = '[your_event_type]'
 ```
 
-### Step 3: Build Analysis Models (WIP.....DON'T USE FOR NOW)
+### Step 3: Build Analysis Models (WIP.....DON'T USE FOR NOW) 
 
 Use temporal joins to answer business questions.
 
