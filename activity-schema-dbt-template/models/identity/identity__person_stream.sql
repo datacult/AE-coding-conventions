@@ -6,7 +6,7 @@ with unioned_activities as (
         activity_id,
         ts
 
-    from {{ ref('stg_stripe__arcee_customers') }}
+    from {{ ref('stg_stripe__arcee_customers') }}       -- MODIFY: Your staging table
     where
         anonymous_customer_id is not null
         and customer is not null
@@ -19,7 +19,7 @@ with unioned_activities as (
         customer,
         activity_id,
         ts
-    from {{ ref('stg_stripe__customers') }}
+    from {{ ref('stg_stripe__customers') }}         
     where
         anonymous_customer_id is not null
         and customer is not null
@@ -32,7 +32,7 @@ with unioned_activities as (
         customer,
         activity_id,
         ts
-    from {{ ref('stg_posthog__identify') }}
+    from {{ ref('stg_posthog__identify') }}     -- MODIFY: Your staging table
     where
         anonymous_customer_id is not null
         and customer is not null
@@ -44,7 +44,8 @@ with unioned_activities as (
         customer,
         activity_id,
         ts
-    from {{ ref('stg_lago__lago' ) }}
+    from {{ ref('stg_lago__lago' ) }}       -- MODIFY: Your staging table
+
     where
         activity = 'purchased_credits'
         and anonymous_customer_id is not null
