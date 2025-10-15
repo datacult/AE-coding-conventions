@@ -30,7 +30,7 @@ git clone https://github.com/datacult/AE-coding-conventions.git
 cd activity-schema-dbt-template
 ```
 
-### 3. Configure Your Data Warehouse
+### 2. Configure Your Data Warehouse
 
 Update `profiles.yml` with your warehouse credentials as required. 
 
@@ -88,7 +88,24 @@ activity_schema_dbt_template/
 
 ## 🎓 Implementation Guide
 
-Refer to the documentation [here](https://www.notion.so/The-Activity-Schema-Data-Model-Implementation-269fa8808c1b80e5a8f8c15a59910846) for more deepdive
+To help with getting started with Activity Schema Data Modeling, we've created a sample dataset and learning tutorials you can follow toward getting familiar with all the files and templates. 
+
+Refer to the sample data dictionary [here](https://docs.google.com/document/d/1jvr_a2CRf5yYJ2edTZ3LgUoiGE-nCtprgxAha2uRfE0/edit?tab=t.0)
+
+- Cloning the Repo and Loading Sample Data
+
+- Creating the staging tables 
+
+- Learning Series #1 
+
+- Learning Series #2
+
+- Learning Series #3
+
+- Learning Series #4
+
+
+Refer to the documentation [here](https://www.notion.so/The-Activity-Schema-Data-Model-Implementation-269fa8808c1b80e5a8f8c15a59910846) for more deepdive. Below is the workflow for an actual Activity schema development for any client. 
 
 ### Step 1: Create all Staging Models and required Intermediate models
 
@@ -286,6 +303,7 @@ Refer to this [documentation](https://www.notion.so/Guide-Activity-Schema-Valida
 - [ ] Enhanced current temporal join and multi-analysis temploral join patterns
 - [ ] More features
 
+
 🙏 Acknowledgments
 
 * Activity schema concept from Narrator
@@ -297,3 +315,4 @@ Feel free to make update and communicate any inherent issues observed as you wor
 
 
 **Built with ❤️ for the DC analytics engineering team - Shout to David/Brittany helping out on this knowledge base**
+
