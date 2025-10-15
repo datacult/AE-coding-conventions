@@ -11,7 +11,7 @@ with devices_to_process AS (
         -- Only process devices with recent identity changes
         select anonymous_customer_id
         from {{ ref('identity_change_detector') }}
-        where last_identity_event >= current_date - 1
+        where last_identity_event >= current_date - 7 
     {% else %}
         -- Full refresh: process all devices
         select distinct anonymous_customer_id
