@@ -138,7 +138,7 @@ union all
 - `identity_change_detector.sql` (tracks identity changes)
 - `identity_time_windows.sql` (creates identity resolution windows)
 
-### Step 2: Create Activity Streams
+### Step 3: Create Activity Streams
 
 Activity streams are standardized representations of business events.
 
@@ -221,7 +221,7 @@ from {{ ref('stg_web_events') }} ---- REPLACE THE STAGING/INTERMEDIATE MODELS
 where event_type = '[your_event_type]'
 ```
 
-### Step 3: Build Analysis Models (WIP.....DON'T USE FOR NOW) 
+### Step 4: Build Analysis Models (WIP.....DON'T USE FOR NOW) 
 
 Use temporal joins to answer business questions.
 
