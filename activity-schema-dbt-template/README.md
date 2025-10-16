@@ -92,11 +92,9 @@ To help with getting started with Activity Schema Data Modeling, we've created a
 
 Refer to the sample data dictionary [here](https://docs.google.com/document/d/1jvr_a2CRf5yYJ2edTZ3LgUoiGE-nCtprgxAha2uRfE0/edit?tab=t.0)
 
-- Cloning the Repo and Loading Sample Data
+- Learning Series #1 - Cloning the Repo,  Loading Sample Data and Creating the staging tables 
 
-- Creating the staging tables 
-
-- Learning Series #1 
+- Learning Series #2 
 
 - Learning Series #2
 
