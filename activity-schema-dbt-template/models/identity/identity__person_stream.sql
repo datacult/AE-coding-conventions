@@ -6,7 +6,7 @@ with unioned_activities as (
         activity_id,
         ts
 
-    from {{ ref('stg_stripe__arcee_customers') }}       -- MODIFY: Your staging table
+    from {{ ref('stg__payment_data') }}       -- MODIFY: Your staging table
     where
         anonymous_customer_id is not null
         and customer is not null
@@ -19,39 +19,25 @@ with unioned_activities as (
         customer,
         activity_id,
         ts
-    from {{ ref('stg_stripe__customers') }}         
-    where
-        anonymous_customer_id is not null
-        and customer is not null
-
-    union all
-
-    select
-        activity,
-        anonymous_customer_id,
-        customer,
-        activity_id,
-        ts
-    from {{ ref('stg_posthog__identify') }}     -- MODIFY: Your staging table
-    where
-        anonymous_customer_id is not null
-        and customer is not null
-
-    union all
-    select
-        activity,
-        anonymous_customer_id,
-        customer,
-        activity_id,
-        ts
-    from {{ ref('stg_lago__lago' ) }}       -- MODIFY: Your staging table
-
-    where
-        activity = 'purchased_credits'
+    from {{ ref('stg__event_data') }}         
+    where activity = 'identify' 
         and anonymous_customer_id is not null
         and customer is not null
-)
 
+    union all
+
+    select
+        activity,
+        anonymous_customer_id,
+        customer,
+        activity_id,
+        ts
+    from {{ ref('stg__signed_up_data') }}     -- MODIFY: Your staging table
+    where
+        anonymous_customer_id is not null
+        and customer is not null
+
+)
 select
     *,
     row_number() over (

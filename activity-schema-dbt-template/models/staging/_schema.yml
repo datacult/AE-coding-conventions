@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: stg__event_data
+    description: >
+      Page views event data. 
+    columns:
+      - name: activity_id
+        data_type: varchar
+        description: >
+          Activity ID
+        data_tests:
+          - unique
+          - not_null
+      - name: ts
+        data_tests:
+          - not_null
+
+  - name: stg__signed_up_data
+    description: >
+      Each row represents signed up users data.  
+    columns:
+      - name: activity_id
+        data_type: varchar
+        description: >
+          Activity ID
+        data_tests:
+          - unique
+          - not_null
+      - name: customer
+        data_tests:
+          - not_null
+      - name: ts
+        data_tests:
+          - not_null
+
+  - name: stg__payment_data
+    description: >
+      Each row shows customer's who have successfully completed payment. 
+    columns:
+      - name: activity_id
+        data_type: varchar
+        description: >
+          Activity ID
+        data_tests:
+          - unique
+          - not_null
+      - name: customer
+        data_tests:
+          - not_null
+      - name: ts
+        data_tests:
+          - not_null
+
+  - name: stg__model_usage
+    description: >
+      Each row shows customer model usage on the platform. 
+    columns:
+      - name: activity_id
+        data_type: varchar
+        description: >
+          Activity ID
+        data_tests:
+          - unique
+          - not_null
+      - name: customer
+        data_tests:
+          - not_null
+      - name: ts
+        data_tests:
+          - not_null

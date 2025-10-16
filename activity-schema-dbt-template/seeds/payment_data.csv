@@ -1,35 +1,19 @@
-ANONYMOUS_CUSTOMER_ID,UNIQUE_ID,WEBHOOK_TYPE,PAYMENT_STATUS,TOTAL_AMOUNT,HASH_EMAIL,CUSTOMER
-cus_RKeX0qw71IsBg4,14714524673601974,invoice.paid_credit_added,succeeded,20.0,f79932aa15723bd7b8622853861fc2b0,f79932aa15723bd7b8622853861fc2b0
-cus_RKeX0qw71IsBg4,16578560139279840,invoice.paid_credit_added,succeeded,20.0,f79932aa15723bd7b8622853861fc2b0,f79932aa15723bd7b8622853861fc2b0
-cus_Rtx1oHkslVX0I9,14751203985498167,invoice.paid_credit_added,succeeded,20.0,1e504d9420e465686b7707709835fdbe,1e504d9420e465686b7707709835fdbe
-cus_Ryp4kKY62CvS7A,14776630857084649,invoice.payment_overdue,pending,0.03,31d7157a35f48f9f64ffbc0d51c5a11b,31d7157a35f48f9f64ffbc0d51c5a11b
-cus_SLLrTHQmOuZefX,14969642606420261,invoice.paid_credit_added,succeeded,5.0,d0b93cbc929eecff2c20160afc8d8c4a,d0b93cbc929eecff2c20160afc8d8c4a
-cus_RKeX0qw71IsBg4,16109063202643365,invoice.paid_credit_added,succeeded,20.0,f79932aa15723bd7b8622853861fc2b0,f79932aa15723bd7b8622853861fc2b0
-cus_S3E0DAOkSPFkwE,14722310502026496,invoice.payment_overdue,failed,1.8,e96b0abe95670e6241425c0f8065586c,e96b0abe95670e6241425c0f8065586c
-cus_RKeX0qw71IsBg4,15203404099062743,invoice.paid_credit_added,succeeded,20.0,f79932aa15723bd7b8622853861fc2b0,f79932aa15723bd7b8622853861fc2b0
-cus_RyMdc4GJQFUjyF,15215895582001266,invoice.payment_overdue,failed,0.67,777e8ffbcca603ef947ec42c6bab21f3,777e8ffbcca603ef947ec42c6bab21f3
-cus_SWOz0hyUvUxBLS,15813155363134835,invoice.payment_overdue,pending,0.06,478edebb42e877288cd5c4b2c4f5c905,478edebb42e877288cd5c4b2c4f5c905
-cus_RyglVaAZBKsRPU,15813914482638569,invoice.payment_overdue,failed,0.54,94b0ad29fbab3708d8cd83bd10a8db4f,94b0ad29fbab3708d8cd83bd10a8db4f
-cus_Shaso6DEzw12fQ,15814031056468927,invoice.payment_overdue,failed,0.92,3c44e953b0c845678073a0582f618618,3c44e953b0c845678073a0582f618618
-cus_Rtx1oHkslVX0I9,15833504478715073,invoice.paid_credit_added,succeeded,20.0,1e504d9420e465686b7707709835fdbe,1e504d9420e465686b7707709835fdbe
-cus_SH8OKbE3ZgoY5Q,16119970775640941,invoice.paid_credit_added,succeeded,30.0,3429188dae9f776f554d536cd81af607,3429188dae9f776f554d536cd81af607
-cus_T0myfwHfxdTsFK,16190222442759146,invoice.paid_credit_added,succeeded,5.0,fe40755baed1974b49511e8d685e6eab,fe40755baed1974b49511e8d685e6eab
-cus_RKeX0qw71IsBg4,15420543173522769,invoice.paid_credit_added,succeeded,20.0,f79932aa15723bd7b8622853861fc2b0,f79932aa15723bd7b8622853861fc2b0
-cus_SUrotSjfE2HNpg,15434829826150861,invoice.payment_overdue,pending,0.13,35e092cc6e11e0b378362342893dfd04,35e092cc6e11e0b378362342893dfd04
-cus_Rtx1oHkslVX0I9,15481762851889326,invoice.paid_credit_added,succeeded,20.0,1e504d9420e465686b7707709835fdbe,1e504d9420e465686b7707709835fdbe
-cus_SH8OKbE3ZgoY5Q,15547508243030752,invoice.paid_credit_added,succeeded,30.0,3429188dae9f776f554d536cd81af607,3429188dae9f776f554d536cd81af607
-cus_RKeX0qw71IsBg4,15805256602729699,invoice.paid_credit_added,succeeded,20.0,f79932aa15723bd7b8622853861fc2b0,f79932aa15723bd7b8622853861fc2b0
-cus_S7VSg1LZ8L1dCO,15215747831649616,invoice.payment_overdue,pending,0.14,1e9b81f5253eed47efcf6c60301bd936,1e9b81f5253eed47efcf6c60301bd936
-cus_Rxi1dywq58zDOd,15215795931199444,invoice.payment_overdue,failed,0.73,38d39931f29cde2abadc14c98c9bd1e6,38d39931f29cde2abadc14c98c9bd1e6
-cus_Rtx1oHkslVX0I9,15236164493497515,invoice.paid_credit_added,succeeded,20.0,1e504d9420e465686b7707709835fdbe,1e504d9420e465686b7707709835fdbe
-cus_RyRgonhyAOGPwk,15295913366027749,invoice.paid_credit_added,succeeded,1.0,63b2417377db5a13ab8c3bfa6b2bf52c,63b2417377db5a13ab8c3bfa6b2bf52c
-cus_SBbLOk4zSYPPHK,14624292383881260,invoice.paid_credit_added,succeeded,3.0,d922ae72db206ae31260ef9b4f003872,d922ae72db206ae31260ef9b4f003872
-cus_SBnMfMLg7JwyoU,14627010209022694,invoice.paid_credit_added,succeeded,2.0,7b8522aa3eab6a646366be70e92023bb,7b8522aa3eab6a646366be70e92023bb
-cus_Rygm2ccU5eoMlU,16117246011704954,invoice.payment_overdue,pending,0.13,ebe433f30c88f2e8ca3ad5e1a7fcbd35,ebe433f30c88f2e8ca3ad5e1a7fcbd35
-cus_RygnFtUCbNVFyk,16117351060247414,invoice.payment_overdue,pending,0.09,5f273db43851058c6c0756f75db1bf9e,5f273db43851058c6c0756f75db1bf9e
-cus_RygmHVDWAsfXjD,16117404127057630,invoice.payment_overdue,failed,1.02,d8a368055389dbede26654151d597e1d,d8a368055389dbede26654151d597e1d
-cus_RygqSPihFpxJ7T,15434911838011858,invoice.payment_overdue,pending,0.43,7e442692711c2f15b76135cb8cd7be58,7e442692711c2f15b76135cb8cd7be58
-cus_Rxi5pqOH91wlZU,15435620363333844,invoice.payment_overdue,pending,0.24,dd5329892a872042d35a7aba9c71506e,dd5329892a872042d35a7aba9c71506e
-cus_S3DtxXL4ERVYIO,15215894339471066,invoice.payment_overdue,failed,2.31,ac4031c6db901f1d1c334e76ade82469,ac4031c6db901f1d1c334e76ade82469
-cus_RygrjsZOZiMIwk,15215710766143231,invoice.payment_overdue,failed,0.58,76bb406ad24610d3bac16af46a1a0ec2,76bb406ad24610d3bac16af46a1a0ec2
-cus_SXpK1ECfCPqDHv,15320725348318961,invoice.paid_credit_added,succeeded,10.0,6b2924aaff2ae63ba5ec9cc36f102a66,6b2924aaff2ae63ba5ec9cc36f102a66
+ANONYMOUS_CUSTOMER_ID,UNIQUE_ID,WEBHOOK_TYPE,CREATED_AT,PAYMENT_STATUS,TOTAL_AMOUNT,EMAIL
+cus_RKeX0qw71IsBg4,16578560139279840,invoice.paid_credit_added,2025-10-03 04:55:02.695 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_SXpK1ECfCPqDHv,15320725348318961,invoice.paid_credit_added,2025-06-23 00:15:50.563 Z,"""succeeded""",10,6b2924aaff2ae63ba5ec9cc36f102a66
+cus_Rtx1oHkslVX0I9,15833504478715073,invoice.paid_credit_added,2025-08-07 04:55:01.636 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_SBbLOk4zSYPPHK,14624292383881260,invoice.paid_credit_added,2025-04-24 23:46:17.498 Z,"""succeeded""",3,d922ae72db206ae31260ef9b4f003872
+cus_SBnMfMLg7JwyoU,14627010209022694,invoice.paid_credit_added,2025-04-25 16:01:22.754 Z,"""succeeded""",2,7b8522aa3eab6a646366be70e92023bb
+cus_RKeX0qw71IsBg4,15805256602729699,invoice.paid_credit_added,2025-08-03 04:55:02.505 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_Rtx1oHkslVX0I9,14751203985498167,invoice.paid_credit_added,2025-05-07 04:55:07.878 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_SLLrTHQmOuZefX,14969642606420261,invoice.paid_credit_added,2025-05-20 01:46:49.747 Z,"""succeeded""",5,d0b93cbc929eecff2c20160afc8d8c4a
+cus_Rtx1oHkslVX0I9,15236164493497515,invoice.paid_credit_added,2025-06-07 04:55:01.860 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_RyRgonhyAOGPwk,15295913366027749,invoice.paid_credit_added,2025-06-17 23:02:35.069 Z,"""succeeded""",1,63b2417377db5a13ab8c3bfa6b2bf52c
+cus_Rtx1oHkslVX0I9,15481762851889326,invoice.paid_credit_added,2025-07-07 04:55:01.967 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_SH8OKbE3ZgoY5Q,15547508243030752,invoice.paid_credit_added,2025-07-12 17:32:38.053 Z,"""succeeded""",30,3429188dae9f776f554d536cd81af607
+cus_RKeX0qw71IsBg4,16109063202643365,invoice.paid_credit_added,2025-09-03 04:55:02.343 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_RKeX0qw71IsBg4,15203404099062743,invoice.paid_credit_added,2025-06-03 04:55:02.778 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_RKeX0qw71IsBg4,14714524673601974,invoice.paid_credit_added,2025-05-03 04:55:04.907 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_RKeX0qw71IsBg4,15420543173522769,invoice.paid_credit_added,2025-07-03 07:04:32.780 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_SH8OKbE3ZgoY5Q,16119970775640941,invoice.paid_credit_added,2025-09-04 08:21:52.497 Z,"""succeeded""",30,3429188dae9f776f554d536cd81af607
+cus_T0myfwHfxdTsFK,16190222442759146,invoice.paid_credit_added,2025-09-09 16:51:01.313 Z,"""succeeded""",5,fe40755baed1974b49511e8d685e6eab
