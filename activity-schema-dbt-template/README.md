@@ -90,20 +90,10 @@ activity_schema_dbt_template/
 
 To help with getting started with Activity Schema Data Modeling, we've created a sample dataset and learning tutorials you can follow toward getting familiar with all the files and templates. 
 
-Refer to the sample data dictionary [here](https://docs.google.com/document/d/1jvr_a2CRf5yYJ2edTZ3LgUoiGE-nCtprgxAha2uRfE0/edit?tab=t.0)
-
-- [Learning Series #1 - Cloning the Repo,  Loading Sample Data and Creating the staging tables](#)
-
-- Learning Series #2 
-
-- Learning Series #2
-
-- Learning Series #3
-
-- Learning Series #4
+Refer to the sample data dictionary [here](https://docs.google.com/document/d/1jvr_a2CRf5yYJ2edTZ3LgUoiGE-nCtprgxAha2uRfE0/edit?tab=t.0) and check [this learning series](#) on how to get started
 
 
-Refer to the documentation [here](https://www.notion.so/The-Activity-Schema-Data-Model-Implementation-269fa8808c1b80e5a8f8c15a59910846) for more deepdive. Below is the workflow for an actual Activity schema development for any client. 
+Refer to the documentation [here](https://www.notion.so/The-Activity-Schema-Data-Model-Implementation-269fa8808c1b80e5a8f8c15a59910846) for more deepdive and [learning series page](https://www.notion.so/Learning-Series-26afa8808c1b80e9835bee5e250c952d) for more tutorials on activity schema modeling. Below is the workflow for an actual Activity schema development for any client. 
 
 ### Step 1: Create all Staging Models and required Intermediate models
 
