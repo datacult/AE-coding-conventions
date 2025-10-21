@@ -1,0 +1,19 @@
+ANONYMOUS_CUSTOMER_ID,UNIQUE_ID,WEBHOOK_TYPE,CREATED_AT,PAYMENT_STATUS,TOTAL_AMOUNT,EMAIL
+cus_RKeX0qw71IsBg4,16578560139279840,invoice.paid_credit_added,2025-10-03 04:55:02.695 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_SXpK1ECfCPqDHv,15320725348318961,invoice.paid_credit_added,2025-06-23 00:15:50.563 Z,"""succeeded""",10,6b2924aaff2ae63ba5ec9cc36f102a66
+cus_Rtx1oHkslVX0I9,15833504478715073,invoice.paid_credit_added,2025-08-07 04:55:01.636 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_SBbLOk4zSYPPHK,14624292383881260,invoice.paid_credit_added,2025-04-24 23:46:17.498 Z,"""succeeded""",3,d922ae72db206ae31260ef9b4f003872
+cus_SBnMfMLg7JwyoU,14627010209022694,invoice.paid_credit_added,2025-04-25 16:01:22.754 Z,"""succeeded""",2,7b8522aa3eab6a646366be70e92023bb
+cus_RKeX0qw71IsBg4,15805256602729699,invoice.paid_credit_added,2025-08-03 04:55:02.505 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_Rtx1oHkslVX0I9,14751203985498167,invoice.paid_credit_added,2025-05-07 04:55:07.878 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_SLLrTHQmOuZefX,14969642606420261,invoice.paid_credit_added,2025-05-20 01:46:49.747 Z,"""succeeded""",5,d0b93cbc929eecff2c20160afc8d8c4a
+cus_Rtx1oHkslVX0I9,15236164493497515,invoice.paid_credit_added,2025-06-07 04:55:01.860 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_RyRgonhyAOGPwk,15295913366027749,invoice.paid_credit_added,2025-06-17 23:02:35.069 Z,"""succeeded""",1,63b2417377db5a13ab8c3bfa6b2bf52c
+cus_Rtx1oHkslVX0I9,15481762851889326,invoice.paid_credit_added,2025-07-07 04:55:01.967 Z,"""succeeded""",20,1e504d9420e465686b7707709835fdbe
+cus_SH8OKbE3ZgoY5Q,15547508243030752,invoice.paid_credit_added,2025-07-12 17:32:38.053 Z,"""succeeded""",30,3429188dae9f776f554d536cd81af607
+cus_RKeX0qw71IsBg4,16109063202643365,invoice.paid_credit_added,2025-09-03 04:55:02.343 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_RKeX0qw71IsBg4,15203404099062743,invoice.paid_credit_added,2025-06-03 04:55:02.778 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_RKeX0qw71IsBg4,14714524673601974,invoice.paid_credit_added,2025-05-03 04:55:04.907 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_RKeX0qw71IsBg4,15420543173522769,invoice.paid_credit_added,2025-07-03 07:04:32.780 Z,"""succeeded""",20,f79932aa15723bd7b8622853861fc2b0
+cus_SH8OKbE3ZgoY5Q,16119970775640941,invoice.paid_credit_added,2025-09-04 08:21:52.497 Z,"""succeeded""",30,3429188dae9f776f554d536cd81af607
+cus_T0myfwHfxdTsFK,16190222442759146,invoice.paid_credit_added,2025-09-09 16:51:01.313 Z,"""succeeded""",5,fe40755baed1974b49511e8d685e6eab

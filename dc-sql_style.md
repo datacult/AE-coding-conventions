@@ -2,176 +2,13 @@
 
   - [General Setup](#general-setup)
   - [SQL Styling and rules](#sql-styling-and-rules)
-  - [Other SQL Style Guide](#other-sql-style-guide)
+  - [Credits](#credits)
 
 
 ## General Setup
 
-To enforce rules to the adopted styling `sqlfluff` will be leveraged. 
+To enforce rules to the adopted styling `sqlfluff` will be leveraged. Reference this doc for more details on how to [set-up](https://github.com/datacult/dbt-project-guidelist) 
 
-### Setup 
-
-#### Poetry
-
-Dependency management and packaging is done with [poetry](https://python-poetry.org/). You will need it to install the virtual environment `dbt` runs in as well as other packages required to contribute. Poetry operates much like [venv](https://docs.python.org/3/library/venv.html) where the environment needs to be activated before it can be used.
-
-1. Download and install [python](https://www.python.org/downloads/)
-
-2. Install pyenv following the following process
-```
-brew update
-
-brew install pyenv
-
-```
-
-* Configure your Mac's environment
-
-```
-echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-
-```
-
-* Activate your changes 
-
-```
-source ~/.bash_profile
-
-```
-
-* You can use pyenv to install any version required for development based on your choice
-
-e.g. 
-- run `pyenv install 3.5.0` in your terminal install python 3.5.0
-- Check the version of python running in your local
-    * run pyenv versions
-
-  
-3. Install poetry
-
-```
-`$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
-
-```
-
-Verify the installation. You should see a version number pop up.
-
-```
-`$ poetry --version`
-
-```
-
-4. cd to the project directory created as instructed in the setup [guide](https://www.notion.so/dbt-Setup-guide-5f8820554ea948f3a10cda2a3d2cf7c9) either the cloned repo or the initially setup directory
-
-5. Once inside the directory, set the local Python version you are going to use. This will prompt poetry to use the local version of Python defined by pyenv:
-* run pyenv versions and you can set any of the returned version 
-
-e.g. 
-
-To set the local directory to run on python 3.7.0:
-
-execute `pyenv local 3.7.0`  and this prompt poetry to use the local version set. 
-
-6. Create a `pyproject.toml` file inside the same directory and paste the following :
-
-
-```
-[tool.poetry]
-name = "dbt"
-version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
-
-[tool.poetry.dependencies]
-python = "^3.9.11"
-dbt-core = "1.0.6"
-dbt-redshift = "1.0.1"
-dbt-snowflake = "1.0.1"
-dbt-snowflake = "1.0.1"
-sqlfluff = "1.2.1"
-sqlfluff-templater-dbt = "1.2.1"
-
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
-
-[tool.sqlfluff.core]
-templater = "jinja"
-dialect = "redshift"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-
-```
-
-Replace the necessary details in the file with information that reflect the environment you are developing on such as : 
-* The python version to the version you set in `step 5` 
-* dialect to the datawarehouse been used that is snowflake, bigquery etc.
-
-
-7. run `poetry install` to allow poetry automatically instally dbt as well as all the necessary dependencies required for sqlfluff to run
-
-8. run `poetry shell` to activate the the new environment created and manage all dependecies
-
-9. To confirm `sqlfluff` and `dbt` is fully installed and all necessary connections setup in `profile.yml` file is correct run the following command:
-
-```
-sqlfluff version
-
-dbt --version
-
-dbt --version
-
-dbt debug
-
-```
-
-10. To confirm `sqlfluff` is fully activated create a `test.sql` model with the code:
-
-```
-
-SELECT a+b  AS foo,
-c AS bar from my_table
-
-```
-
-* Save the file
-
-* run `sqlfluff lint test.sql` to see the result returned
-
-The result below should be outputed 
-
-```
-
-== [test.sql] FAIL                                                                                                                                              
-L:   1 | P:   1 | L034 | Select wildcards then simple targets before calculations
-                       | and aggregates.
-L:   1 | P:   1 | L036 | Select targets should be on a new line unless there is
-                       | only one select target.
-L:   1 | P:   9 | L006 | Missing whitespace before +
-L:   1 | P:   9 | L006 | Missing whitespace after +
-L:   1 | P:  11 | L039 | Unnecessary whitespace found.
-L:   2 | P:   1 | L003 | Expected 1 indentations, found 0 [compared to line 01]
-L:   2 | P:  10 | L010 | Keywords must be consistently upper case.
-L:   2 | P:  26 | L009 | Files must end with a single trailing newline.
-
-
-```
-
-To allow `sqlfluff` correct the formatting after checking the error message and manually correcting when necessary:
-
-executre:
-
-```
- 
-sqlfluff fix test.sql
-
-save the test.sql file again
-
-sqlfluff lint test.sql` 
-
-```
 
 ## SQL Styling and Rules
 
@@ -205,6 +42,9 @@ sqlfluff lint test.sql`
 
  - Prefer `WHERE` to `HAVING` when either would suffice.
 
+ - Maintain the same casing (UPPER or LOWER) across. We often prefer `Lower` 
+ 
+
 ### Commenting
 
   - When making single line comments in a model use the `--` syntax
@@ -225,16 +65,16 @@ sqlfluff lint test.sql`
 
  ```
   -- Preferred
-  SELECT
-      id    AS account_id,
-      name  AS account_name,
-      type  AS account_type,
+  select
+      id    as account_id,
+      name  as account_name,
+      type  as account_type,
       ...
 
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       id,
       name,
       type,
@@ -245,30 +85,30 @@ sqlfluff lint test.sql`
 
 ```
  -- Preferred
-  SELECT
+  select
       dvcecreatedtstamp AS device_created_timestamp
       ...
 
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       dvcecreatedtstamp AS DeviceCreatedTimestamp
       ...
 ```
  - Boolean field names should start with `has_`, `is_`, or `does_`:
 ```
  -- Preferred
-  SELECT
-      deleted AS is_deleted,
-      sla     AS has_sla
+  select
+      deleted as is_deleted,
+      sla     as has_sla
       ...
 
 
   -- vs
 
   -- Not Preferred
-  SELECT
+  select
       deleted,
       sla,
       ...
@@ -281,10 +121,10 @@ sqlfluff lint test.sql`
   - When truncating dates name the column in accordance with the truncation.
 
 ```
-SELECT
+select
       original_at,                                        -- 2020-01-15 12:15:00.00
       original_date,                                      -- 2020-01-15
-      DATE_TRUNC('month',original_date) AS original_month -- 2020-01-01
+      date_trunc('month',original_date) AS original_month -- 2020-01-01
       ...
 
 ```
@@ -296,49 +136,49 @@ SELECT
 
 ```
 -- Preferred
-SELECT
+select
     budget_forecast_cogs_opex.account_id,
     date_details.fiscal_year,
     date_details.fiscal_quarter,
     date_details.fiscal_quarter_name,
     cost_category.cost_category_level_1,
     cost_category.cost_category_level_2
-FROM budget_forecast_cogs_opex
-LEFT JOIN date_details
-    ON date_details.first_day_of_month = budget_forecast_cogs_opex.accounting_period
-LEFT JOIN cost_category
-    ON budget_forecast_cogs_opex.unique_account_name = cost_category.unique_account_name
+from budget_forecast_cogs_opex
+left join date_details
+    on date_details.first_day_of_month = budget_forecast_cogs_opex.accounting_period
+left join cost_category
+    on budget_forecast_cogs_opex.unique_account_name = cost_category.unique_account_name
 
  
 -- vs 
 
 -- Not Preferred
-SELECT
+select
     a.account_id,
     b.fiscal_year,
     b.fiscal_quarter,
     b.fiscal_quarter_name,
     c.cost_category_level_1,
     c.cost_category_level_2
-FROM budget_forecast_cogs_opex a
-LEFT JOIN date_details b
-    ON b.first_day_of_month = a.accounting_period
-LEFT JOIN cost_category c
-    ON b.unique_account_name = c.unique_account_name
+from budget_forecast_cogs_opex a
+left join date_details b
+    on b.first_day_of_month = a.accounting_period
+left join cost_category c
+    on b.unique_account_name = c.unique_account_name
 
 ```    
 - Only use double quotes when necessary, such as columns that contain special characters or are case sensitive.
 
 ```
       -- Preferred
-      SELECT 
+      select 
           "First_Name_&_" AS first_name,
           ...
 
       -- vs
 
       -- Not Preferred
-      SELECT 
+      select 
           FIRST_NAME AS first_name,
           ...
 
@@ -347,14 +187,14 @@ LEFT JOIN cost_category c
 
 ```
       -- Preferred
-      SELECT
+      select
           data_by_row['id']::bigint as id_value
           ...
         
       -- vs
 
       -- Not Preferred
-      SELECT
+      select
           data_by_row:"id"::bigint as id_value
           ...
 
@@ -363,16 +203,16 @@ LEFT JOIN cost_category c
 
 ```
       -- Preferred
-      SELECT *
-      FROM first_table
-      INNER JOIN second_table
+      select *
+      from first_table
+      inner join second_table
       ...
 
       -- vs
 
       -- Not Preferred
-      SELECT *
-      FROM first_table,
+      select *
+      from first_table,
           second_table
       ...
 
@@ -382,33 +222,33 @@ LEFT JOIN cost_category c
 
 ```
   -- Preferred
-  WITH important_list AS (
+  with important_list AS (
 
-      SELECT DISTINCT
+      select distinct
           specific_column
-      FROM other_table
-      WHERE specific_column != 'foo'
+      from other_table
+      where specific_column != 'foo'
         
   )
 
-  SELECT
+  select
       primary_table.column_1,
       primary_table.column_2
-  FROM primary_table
-  INNER JOIN important_list
-      ON primary_table.column_3 = important_list.specific_column
+  from primary_table
+  inner join important_list
+      on primary_table.column_3 = important_list.specific_column
 
   -- vs   
 
   -- Not Preferred
-  SELECT
+  select
       primary_table.column_1,
       primary_table.column_2
-  FROM primary_table
-  WHERE primary_table.column_3 IN (
-      SELECT DISTINCT specific_column 
-      FROM other_table 
-      WHERE specific_column != 'foo')
+  from primary_table
+  where primary_table.column_3 IN (
+      select distinct specific_column 
+      from other_table 
+      where specific_column != 'foo')
 
 ```
 - Use CTEs to reference other tables.
@@ -432,32 +272,32 @@ The exception to this is for timestamps. Prefer TIMESTAMP to TIME. Note that the
 
 ```
   -- Preferred
-  SELECT 
-      IFF(column_1 = 'foo', column_2,column_3) AS logic_switch,
+  select 
+      iff(column_1 = 'foo', column_2,column_3) as logic_switch,
       ...
 
   -- vs 
 
   -- Not Preferred
-  SELECT
-      CASE
-          WHEN column_1 = 'foo' THEN column_2
-          ELSE column_3
-      END AS logic_switch,
+  select
+      case
+          when column_1 = 'foo' then column_2
+          else column_3
+      end as logic_switch,
       ...
 ```
 - Prefer IFF to selecting a boolean statement:
 
 ```
   -- Preferred
-  SELECT 
-      IFF(amount < 10,TRUE,FALSE) AS is_less_than_ten,
+  select 
+      iff(amount < 10,TRUE,FALSE) AS is_less_than_ten,
       ...
   -- vs
 
   -- Not Preferred
-  SELECT 
-      (amount < 10) AS is_less_than_ten,
+  select 
+      (amount < 10) as is_less_than_ten,
       ...
 
 ```
@@ -465,29 +305,29 @@ The exception to this is for timestamps. Prefer TIMESTAMP to TIME. Note that the
 
 ```
   -- Preferred
-  SELECT
-      CASE field_id
-          WHEN 1 THEN 'date'
-          WHEN 2 THEN 'integer'
-          WHEN 3 THEN 'currency'
-          WHEN 4 THEN 'boolean'
-          WHEN 5 THEN 'variant'
-          WHEN 6 THEN 'text'
+  select
+      case field_id
+          when 1 then 'date'
+          when 2 then 'integer'
+          when 3 then 'currency'
+          when 4 then 'boolean'
+          when 5 then 'variant'
+          when 6 then 'text'
       END AS field_type,
       ...
 
   -- vs 
 
   -- Not Preferred
-  SELECT 
-      CASE
-          WHEN field_id = 1 THEN 'date'
-          WHEN field_id = 2 THEN 'integer'
-          WHEN field_id = 3 THEN 'currency'
-          WHEN field_id = 4 THEN 'boolean'
-          WHEN field_id = 5 THEN 'variant'
-          WHEN field_id = 6 THEN 'text'
-      END AS field_type,
+  select 
+      case
+          when field_id = 1 then 'date'
+          when field_id = 2 then 'integer'
+          when field_id = 3 then 'currency'
+          when field_id = 4 then 'boolean'
+          when field_id = 5 then 'variant'
+          when field_id = 6 then 'text'
+      end as field_type,
       ...
 ```    
 - Prefer the explicit date function over date_part, but prefer date_part over extract:
