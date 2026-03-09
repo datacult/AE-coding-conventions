@@ -25,7 +25,7 @@ Leverage the official dbt best [practices](https://docs.getdbt.com/guides/legacy
 
 ## Profiles
 
-####  Profile names should only the name of the company they're for.
+####  Profile names should only include the name of the company they're for.
 
 #### Sensitive information should be hidden as much as possible by leveraging environment variables
 
@@ -34,7 +34,7 @@ Leverage the official dbt best [practices](https://docs.getdbt.com/guides/legacy
 ## Project structure
 
 The desire to have a project layout is to help with the decision making process and build a standard across projects.<br>This allows for ease in setting up projects and can reduce decision fatigue.
-In other to allow easy of navigating around the project, it's important the project structure reflect how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models.
+In other to allow ease of navigating around the project, it's important that the project structure reflects how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models.
 
 To that effect, Models should be organized into folders corresponding to their purpose.
 
@@ -102,7 +102,7 @@ This is the layer where most of the transformation takes place. This is where we
 These models are built with specific purposes on the way to the final data products
 
 When it comes to naming files, it is important to use the `int_model_[entity]s_[verb]s`.sql format.
-The best guiding principle is to think about verbs (e.g. *pivoted*, *aggregated_to_user*, *joined*, *fanned_out_by_quanity*, *funnel_created*, etc.) 
+The best guiding principle is to think about verbs (e.g. *pivoted*, *aggregated_to_user*, *joined*, *fanned_out_by_quantity*, *funnel_created*, etc.) 
 in the int_model layer. In our example project, we use an int_model model to pivot payments out to the order grain, so we name our model *int_model_payments_pivoted_to_orders*. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know SQL. 
 That clarity is worth the long file name. It’s important to note that we’ve dropped the double underscores at this layer.
 In moving towards business conformed concepts, we no longer need to separate a system and an entity and simply reference the unified entity if possible. 
@@ -184,7 +184,7 @@ Other considerations can be found [here](https://docs.getdbt.com/guides/best-pra
 ## Model Configuration
 
 * Follow the naming convention defined for each models in the different layer defined [here](#project-structure)
-* Each Model should have the appropritate optimization and configuration attributes (like sort/dist keys for Redshift, partition/clustering for BigQuery etc.) should be specified in the model.
+* Each Model should have the appropriate optimization and configuration attributes (like sort/dist keys for Redshift, partition/clustering for BigQuery etc.) should be specified in the model.
 * If a particular configuration applies to all models in a directory, it should be specified in the dbt_project.yml file.
 
 In-model configurations should be specified like this for proper formating:
